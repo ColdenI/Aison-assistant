@@ -507,6 +507,11 @@ namespace Aison___assistant
                 {
                     File.Delete(file);
                 }
+                
+                foreach (string file in Directory.EnumerateFiles("data/custom/", "*.*", SearchOption.AllDirectories))
+                {
+                    File.Delete(file);
+                }
                 MessageBox.Show("Программа подготовлна к удалению.");
             }
             catch(Exception ex)
