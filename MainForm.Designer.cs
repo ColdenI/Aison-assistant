@@ -106,7 +106,7 @@ namespace Aison___assistant
             this.button_actAison.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_actAison.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.button_actAison.Location = new System.Drawing.Point(0, 446);
-            this.button_actAison.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_actAison.Margin = new System.Windows.Forms.Padding(4);
             this.button_actAison.Name = "button_actAison";
             this.button_actAison.Size = new System.Drawing.Size(409, 64);
             this.button_actAison.TabIndex = 0;
@@ -476,7 +476,7 @@ namespace Aison___assistant
             // 
             this.textBox_log_message.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox_log_message.Location = new System.Drawing.Point(0, 16);
-            this.textBox_log_message.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_log_message.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_log_message.Name = "textBox_log_message";
             this.textBox_log_message.Size = new System.Drawing.Size(231, 494);
             this.textBox_log_message.TabIndex = 3;
@@ -489,7 +489,7 @@ namespace Aison___assistant
             this.listBox_custom_command.FormattingEnabled = true;
             this.listBox_custom_command.ItemHeight = 19;
             this.listBox_custom_command.Location = new System.Drawing.Point(4, 51);
-            this.listBox_custom_command.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.listBox_custom_command.Name = "listBox_custom_command";
             this.listBox_custom_command.Size = new System.Drawing.Size(401, 391);
             this.listBox_custom_command.TabIndex = 4;
@@ -500,7 +500,7 @@ namespace Aison___assistant
             this.button_add_new_custom_command.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_add_new_custom_command.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_add_new_custom_command.Location = new System.Drawing.Point(4, 19);
-            this.button_add_new_custom_command.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_add_new_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.button_add_new_custom_command.Name = "button_add_new_custom_command";
             this.button_add_new_custom_command.Size = new System.Drawing.Size(401, 32);
             this.button_add_new_custom_command.TabIndex = 5;
@@ -514,7 +514,7 @@ namespace Aison___assistant
             this.button_edit_custom_command.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_edit_custom_command.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_edit_custom_command.Location = new System.Drawing.Point(0, 0);
-            this.button_edit_custom_command.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_edit_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.button_edit_custom_command.Name = "button_edit_custom_command";
             this.button_edit_custom_command.Size = new System.Drawing.Size(401, 32);
             this.button_edit_custom_command.TabIndex = 6;
@@ -528,7 +528,7 @@ namespace Aison___assistant
             this.button_remove_command.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_remove_command.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_remove_command.Location = new System.Drawing.Point(0, 32);
-            this.button_remove_command.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_remove_command.Margin = new System.Windows.Forms.Padding(4);
             this.button_remove_command.Name = "button_remove_command";
             this.button_remove_command.Size = new System.Drawing.Size(401, 32);
             this.button_remove_command.TabIndex = 7;
@@ -543,9 +543,9 @@ namespace Aison___assistant
             this.groupBox1.Controls.Add(this.button_add_new_custom_command);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(409, 446);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
@@ -557,7 +557,7 @@ namespace Aison___assistant
             this.panel1.Controls.Add(this.button_edit_custom_command);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(4, 377);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(401, 65);
             this.panel1.TabIndex = 10;
@@ -566,7 +566,7 @@ namespace Aison___assistant
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 27);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -608,7 +608,7 @@ namespace Aison___assistant
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Aison";

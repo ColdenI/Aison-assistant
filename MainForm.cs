@@ -286,12 +286,13 @@ namespace Aison___assistant
 
         private void Open_AddCommand()
         {
-            if(listBox_custom_command.Items.Count >= 5)
-            {
-                if(MessageBox.Show("Вы не можете добавить больше 5 собственных команд, потому что у вас пробная версия программы.\n \nХотите купить сейчас?", "Ой...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
-                    Open_ByeAisonForm();
-                return;
-            }
+            if(!isPRactive)
+                if(listBox_custom_command.Items.Count >= 5)
+                {
+                    if(MessageBox.Show("Вы не можете добавить больше 5 собственных команд, потому что у вас пробная версия программы.\n \nХотите купить сейчас?", "Ой...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
+                        Open_ByeAisonForm();
+                    return;
+                }
 
             timer1.Stop();
             var Form = new AddEditDefCommandForm();
