@@ -560,6 +560,11 @@ namespace Aison___assistant
             timer1.Start();
         }
 
+        private void какРаботаетПрограммаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("media\\infoWork.pdf");
+        }
+
         static private bool ContainsItemInArray<T>(T[] arr, T i)
         {
             foreach (T _i in arr)

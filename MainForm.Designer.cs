@@ -74,7 +74,8 @@ namespace Aison___assistant
             this.панельКомандToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_bye_aison = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripSplitButton();
+            this.какРаботаетПрограммаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox_log_message = new System.Windows.Forms.RichTextBox();
             this.listBox_custom_command = new System.Windows.Forms.ListBox();
             this.button_add_new_custom_command = new System.Windows.Forms.Button();
@@ -441,7 +442,7 @@ namespace Aison___assistant
             this.панельКомандToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.панельКомандToolStripMenuItem.Enabled = false;
             this.панельКомандToolStripMenuItem.Name = "панельКомандToolStripMenuItem";
-            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.панельКомандToolStripMenuItem.Text = "Панель команд";
             this.панельКомандToolStripMenuItem.CheckedChanged += new System.EventHandler(this.панельКомандToolStripMenuItem_CheckedChanged);
             // 
@@ -465,12 +466,21 @@ namespace Aison___assistant
             // 
             // toolStripButton2
             // 
+            this.toolStripButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.какРаботаетПрограммаToolStripMenuItem});
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(128, 24);
+            this.toolStripButton2.Size = new System.Drawing.Size(143, 24);
             this.toolStripButton2.Text = "О программе";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            this.toolStripButton2.ButtonClick += new System.EventHandler(this.toolStripButton2_Click);
+            // 
+            // какРаботаетПрограммаToolStripMenuItem
+            // 
+            this.какРаботаетПрограммаToolStripMenuItem.Name = "какРаботаетПрограммаToolStripMenuItem";
+            this.какРаботаетПрограммаToolStripMenuItem.Size = new System.Drawing.Size(267, 26);
+            this.какРаботаетПрограммаToolStripMenuItem.Text = "Как работает программа";
+            this.какРаботаетПрограммаToolStripMenuItem.Click += new System.EventHandler(this.какРаботаетПрограммаToolStripMenuItem_Click);
             // 
             // textBox_log_message
             // 
@@ -683,8 +693,9 @@ namespace Aison___assistant
         private System.Windows.Forms.ToolStripMenuItem подготовитьКУдалениюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton_bye_aison;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
         public System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripButton2;
+        private System.Windows.Forms.ToolStripMenuItem какРаботаетПрограммаToolStripMenuItem;
     }
 }
 
