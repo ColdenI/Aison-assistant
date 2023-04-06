@@ -12,7 +12,7 @@ namespace Aison___assistant
         public bool isActive = false;
         public string[] Active_Words;
         public SpeechSynthesizer Say_sound;
-        private string lastSay = "";
+        private string lastSay = "Я ничего не говорил";
         public Timer timer_activAison;
         public List<Command> commands;
         public MainForm Obj_MainForm;
