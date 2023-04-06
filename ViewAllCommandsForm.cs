@@ -10,7 +10,7 @@ namespace Aison___assistant
             InitializeComponent();
             listBox1.Items.Clear();
             listBox1.Items.AddRange(list.ToArray());
+            this.Text = this.Text + " (" + listBox1.Items.Count.ToString() + ")";
         }
-
     }
 }
