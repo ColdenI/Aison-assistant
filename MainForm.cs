@@ -322,10 +322,13 @@ namespace Aison___assistant
 
         private void button_actAison_Click(object sender, EventArgs e)
         {
-            Aison.Active();
-            timer_aison_activ.Stop();
-            timer_aison_activ.Start();
-            UI_Update();
+            if (!Aison.isActive)
+            {
+                Aison.Active();
+                timer_aison_activ.Stop();
+                timer_aison_activ.Start();
+                UI_Update();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
