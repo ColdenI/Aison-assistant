@@ -42,6 +42,7 @@ namespace Aison___assistant
             this.повторитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.перезапуститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.скрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.калькуляторToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.проводникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -164,6 +165,7 @@ namespace Aison___assistant
             this.повторитьToolStripMenuItem,
             this.закрытьToolStripMenuItem,
             this.перезапуститьToolStripMenuItem,
+            this.скрытьToolStripMenuItem,
             this.toolStripSeparator1,
             this.калькуляторToolStripMenuItem,
             this.проводникToolStripMenuItem,
@@ -179,68 +181,75 @@ namespace Aison___assistant
             // активацияToolStripMenuItem
             // 
             this.активацияToolStripMenuItem.Name = "активацияToolStripMenuItem";
-            this.активацияToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.активацияToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.активацияToolStripMenuItem.Text = "Активация";
             this.активацияToolStripMenuItem.Click += new System.EventHandler(this.активацияToolStripMenuItem_Click);
             // 
             // отключитьToolStripMenuItem
             // 
             this.отключитьToolStripMenuItem.Name = "отключитьToolStripMenuItem";
-            this.отключитьToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.отключитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.отключитьToolStripMenuItem.Text = "Отключить";
             this.отключитьToolStripMenuItem.Click += new System.EventHandler(this.отключитьToolStripMenuItem_Click);
             // 
             // повторитьToolStripMenuItem
             // 
             this.повторитьToolStripMenuItem.Name = "повторитьToolStripMenuItem";
-            this.повторитьToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.повторитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.повторитьToolStripMenuItem.Text = "Повторить";
             this.повторитьToolStripMenuItem.Click += new System.EventHandler(this.повторитьToolStripMenuItem_Click);
             // 
             // закрытьToolStripMenuItem
             // 
             this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
-            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.закрытьToolStripMenuItem.Text = "Закрыть";
             this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
             // 
             // перезапуститьToolStripMenuItem
             // 
             this.перезапуститьToolStripMenuItem.Name = "перезапуститьToolStripMenuItem";
-            this.перезапуститьToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.перезапуститьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.перезапуститьToolStripMenuItem.Text = "Перезапустить";
             this.перезапуститьToolStripMenuItem.Click += new System.EventHandler(this.перезапуститьToolStripMenuItem_Click);
+            // 
+            // скрытьToolStripMenuItem
+            // 
+            this.скрытьToolStripMenuItem.Name = "скрытьToolStripMenuItem";
+            this.скрытьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.скрытьToolStripMenuItem.Text = "Скрыть";
+            this.скрытьToolStripMenuItem.Click += new System.EventHandler(this.скрытьToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(192, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
             // 
             // калькуляторToolStripMenuItem
             // 
             this.калькуляторToolStripMenuItem.Name = "калькуляторToolStripMenuItem";
-            this.калькуляторToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.калькуляторToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.калькуляторToolStripMenuItem.Text = "Калькулятор";
             this.калькуляторToolStripMenuItem.Click += new System.EventHandler(this.калькуляторToolStripMenuItem_Click);
             // 
             // проводникToolStripMenuItem
             // 
             this.проводникToolStripMenuItem.Name = "проводникToolStripMenuItem";
-            this.проводникToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.проводникToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.проводникToolStripMenuItem.Text = "Проводник";
             this.проводникToolStripMenuItem.Click += new System.EventHandler(this.проводникToolStripMenuItem_Click);
             // 
             // датаToolStripMenuItem
             // 
             this.датаToolStripMenuItem.Name = "датаToolStripMenuItem";
-            this.датаToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.датаToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.датаToolStripMenuItem.Text = "Дата";
             this.датаToolStripMenuItem.Click += new System.EventHandler(this.датаToolStripMenuItem_Click);
             // 
             // времяToolStripMenuItem
             // 
             this.времяToolStripMenuItem.Name = "времяToolStripMenuItem";
-            this.времяToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.времяToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.времяToolStripMenuItem.Text = "Время";
             this.времяToolStripMenuItem.Click += new System.EventHandler(this.времяToolStripMenuItem_Click);
             // 
@@ -250,7 +259,7 @@ namespace Aison___assistant
             this.playPauseToolStripMenuItem});
             this.mediaToolStripMenuItem.Enabled = false;
             this.mediaToolStripMenuItem.Name = "mediaToolStripMenuItem";
-            this.mediaToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.mediaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.mediaToolStripMenuItem.Text = "Media";
             // 
             // playPauseToolStripMenuItem
@@ -266,7 +275,7 @@ namespace Aison___assistant
             this.перезагрузитьToolStripMenuItem,
             this.гибернацияToolStripMenuItem});
             this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.windowsToolStripMenuItem.Text = "Windows";
             // 
             // отключитьToolStripMenuItem1
@@ -297,7 +306,7 @@ namespace Aison___assistant
             this.яндексToolStripMenuItem,
             this.googleToolStripMenuItem});
             this.webToolStripMenuItem.Name = "webToolStripMenuItem";
-            this.webToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
+            this.webToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.webToolStripMenuItem.Text = "Web";
             // 
             // браузерToolStripMenuItem
@@ -442,7 +451,7 @@ namespace Aison___assistant
             this.панельКомандToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.панельКомандToolStripMenuItem.Enabled = false;
             this.панельКомандToolStripMenuItem.Name = "панельКомандToolStripMenuItem";
-            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.панельКомандToolStripMenuItem.Text = "Панель команд";
             this.панельКомандToolStripMenuItem.CheckedChanged += new System.EventHandler(this.панельКомандToolStripMenuItem_CheckedChanged);
             // 
@@ -696,6 +705,7 @@ namespace Aison___assistant
         public System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripSplitButton toolStripButton2;
         private System.Windows.Forms.ToolStripMenuItem какРаботаетПрограммаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem скрытьToolStripMenuItem;
     }
 }
 

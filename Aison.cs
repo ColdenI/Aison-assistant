@@ -23,7 +23,7 @@ namespace Aison___assistant
         }
 
         public string[] TCom_Time, TCom_Data, TCom_replayLast, TCom_aisonSleep, TCom_aisonClose, TCom_MediaPause, TCom_MediaNext, TCom_MediaPrev, TCom_ProcessCalc, TCom_Explorer,
-            TCom_WebBrowser, TCom_WebBrowser_Yandex, TCom_WebBrowser_Google, TCom_WindowsRes, TCom_WindowsOff, TCom_WindowsSleep, TCom_aisonRes;
+            TCom_WebBrowser, TCom_WebBrowser_Yandex, TCom_WebBrowser_Google, TCom_WindowsRes, TCom_WindowsOff, TCom_WindowsSleep, TCom_aisonRes, TCom_aisonDeView;
 
 
         public void Active()
@@ -160,6 +160,12 @@ namespace Aison___assistant
         public void Com_AisonProgramReStart()
         {
             Application.Restart();
+        }
+        public void Com_aisonDeView()
+        {
+            Obj_MainForm.timer1.Stop();
+            Obj_MainForm.Visible = false;
+            DeActive();
         }
 
         public static void OpenProcessArg(string command, string arg)

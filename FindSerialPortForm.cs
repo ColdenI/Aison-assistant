@@ -28,7 +28,8 @@ namespace Aison___assistant
             {
                 comboBox1.Items.Add(port);
             }
-            comboBox1.Text = comboBox1.Items[0].ToString();
+            if (comboBox1.Items.Count > 0)
+                comboBox1.Text = comboBox1.Items[0].ToString();
         }
 
         private void FindSerialPortForm_Load(object sender, EventArgs e)
