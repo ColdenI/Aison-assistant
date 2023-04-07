@@ -42,6 +42,7 @@ namespace Aison___assistant
                 if (_st == "EXE") eType = Command.EType.Exe;
                 if (_st == "URL") eType = Command.EType.Url;
                 if (_st == "SERIAL") eType = Command.EType.Serial;
+                if (_st == "SAY") eType = Command.EType.Say;
                 Type = eType;
                 Arg = item.GetItemString("arg1");
                 Arg_2 = item.GetItemString("arg2");
@@ -104,6 +105,10 @@ namespace Aison___assistant
                         serialPort.Close();
                     }
                     break;
+                case EType.Say:
+                    MainForm.Aison.Say(Arg.ToString());
+
+                    break;
             }
             
         }
@@ -113,7 +118,8 @@ namespace Aison___assistant
         {
             Exe = 0,
             Url = 1,
-            Serial = 2
+            Serial = 2,
+            Say = 3
         };
     }
 }
