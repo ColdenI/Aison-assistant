@@ -107,7 +107,7 @@ namespace Aison___assistant
             this.button_actAison.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_actAison.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_actAison.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.button_actAison.Location = new System.Drawing.Point(0, 446);
+            this.button_actAison.Location = new System.Drawing.Point(0, 442);
             this.button_actAison.Margin = new System.Windows.Forms.Padding(4);
             this.button_actAison.Name = "button_actAison";
             this.button_actAison.Size = new System.Drawing.Size(371, 64);
@@ -129,7 +129,7 @@ namespace Aison___assistant
             this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(586, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(586, 31);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -146,7 +146,7 @@ namespace Aison___assistant
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
             this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(85, 24);
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(85, 28);
             this.toolStripSplitButton1.Text = "Aison";
             this.toolStripSplitButton1.ButtonClick += new System.EventHandler(this.isAisonAct_indi_Click);
             // 
@@ -357,14 +357,14 @@ namespace Aison___assistant
             this.писатьLogToolStripMenuItem.CheckOnClick = true;
             this.писатьLogToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.писатьLogToolStripMenuItem.Name = "писатьLogToolStripMenuItem";
-            this.писатьLogToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.писатьLogToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.писатьLogToolStripMenuItem.Text = "Писать log";
             this.писатьLogToolStripMenuItem.CheckedChanged += new System.EventHandler(this.писатьLogToolStripMenuItem_CheckedChanged);
             // 
             // посмотретьLogToolStripMenuItem
             // 
             this.посмотретьLogToolStripMenuItem.Name = "посмотретьLogToolStripMenuItem";
-            this.посмотретьLogToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.посмотретьLogToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.посмотретьLogToolStripMenuItem.Text = "Посмотреть log";
             this.посмотретьLogToolStripMenuItem.Click += new System.EventHandler(this.посмотретьLogToolStripMenuItem_Click);
             // 
@@ -431,7 +431,7 @@ namespace Aison___assistant
             this.isAisonAct_indi.Image = ((System.Drawing.Image)(resources.GetObject("isAisonAct_indi.Image")));
             this.isAisonAct_indi.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.isAisonAct_indi.Name = "isAisonAct_indi";
-            this.isAisonAct_indi.Size = new System.Drawing.Size(29, 24);
+            this.isAisonAct_indi.Size = new System.Drawing.Size(29, 28);
             this.isAisonAct_indi.Click += new System.EventHandler(this.isAisonAct_indi_Click);
             // 
             // toolStripSplitButton2
@@ -441,7 +441,7 @@ namespace Aison___assistant
             this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
             this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton2.Name = "toolStripSplitButton2";
-            this.toolStripSplitButton2.Size = new System.Drawing.Size(74, 24);
+            this.toolStripSplitButton2.Size = new System.Drawing.Size(74, 28);
             this.toolStripSplitButton2.Text = "Вид";
             this.toolStripSplitButton2.ButtonClick += new System.EventHandler(this.toolStripSplitButton2_ButtonClick);
             // 
@@ -451,7 +451,7 @@ namespace Aison___assistant
             this.панельКомандToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.панельКомандToolStripMenuItem.Enabled = false;
             this.панельКомандToolStripMenuItem.Name = "панельКомандToolStripMenuItem";
-            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.панельКомандToolStripMenuItem.Text = "Панель команд";
             this.панельКомандToolStripMenuItem.CheckedChanged += new System.EventHandler(this.панельКомандToolStripMenuItem_CheckedChanged);
             // 
@@ -460,7 +460,7 @@ namespace Aison___assistant
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(108, 24);
+            this.toolStripButton1.Size = new System.Drawing.Size(108, 28);
             this.toolStripButton1.Text = "Настройки";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -469,7 +469,7 @@ namespace Aison___assistant
             this.toolStripButton_bye_aison.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_bye_aison.Image")));
             this.toolStripButton_bye_aison.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_bye_aison.Name = "toolStripButton_bye_aison";
-            this.toolStripButton_bye_aison.Size = new System.Drawing.Size(122, 24);
+            this.toolStripButton_bye_aison.Size = new System.Drawing.Size(122, 28);
             this.toolStripButton_bye_aison.Text = "Купить Aison";
             this.toolStripButton_bye_aison.Click += new System.EventHandler(this.toolStripButton_bye_aison_Click);
             // 
@@ -480,7 +480,7 @@ namespace Aison___assistant
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(143, 24);
+            this.toolStripButton2.Size = new System.Drawing.Size(143, 28);
             this.toolStripButton2.Text = "О программе";
             this.toolStripButton2.ButtonClick += new System.EventHandler(this.toolStripButton2_Click);
             // 
@@ -497,7 +497,7 @@ namespace Aison___assistant
             this.textBox_log_message.Location = new System.Drawing.Point(0, 16);
             this.textBox_log_message.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_log_message.Name = "textBox_log_message";
-            this.textBox_log_message.Size = new System.Drawing.Size(210, 494);
+            this.textBox_log_message.Size = new System.Drawing.Size(210, 490);
             this.textBox_log_message.TabIndex = 3;
             this.textBox_log_message.Text = "";
             // 
@@ -510,7 +510,7 @@ namespace Aison___assistant
             this.listBox_custom_command.Location = new System.Drawing.Point(4, 51);
             this.listBox_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.listBox_custom_command.Name = "listBox_custom_command";
-            this.listBox_custom_command.Size = new System.Drawing.Size(363, 391);
+            this.listBox_custom_command.Size = new System.Drawing.Size(363, 387);
             this.listBox_custom_command.TabIndex = 4;
             // 
             // button_add_new_custom_command
@@ -565,7 +565,7 @@ namespace Aison___assistant
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(371, 446);
+            this.groupBox1.Size = new System.Drawing.Size(371, 442);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ваши команды";
@@ -575,7 +575,7 @@ namespace Aison___assistant
             this.panel1.Controls.Add(this.button_remove_command);
             this.panel1.Controls.Add(this.button_edit_custom_command);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(4, 377);
+            this.panel1.Location = new System.Drawing.Point(4, 373);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(363, 65);
@@ -584,7 +584,7 @@ namespace Aison___assistant
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 27);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 31);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -598,7 +598,7 @@ namespace Aison___assistant
             this.splitContainer1.Panel2.AllowDrop = true;
             this.splitContainer1.Panel2.Controls.Add(this.textBox_log_message);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Size = new System.Drawing.Size(586, 510);
+            this.splitContainer1.Size = new System.Drawing.Size(586, 506);
             this.splitContainer1.SplitterDistance = 371;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 9;

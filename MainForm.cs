@@ -509,20 +509,29 @@ namespace Aison___assistant
             DeIncludeInAutoStart();
             try 
             {
-                foreach (string file in Directory.EnumerateFiles("data/logs/", "*.*", SearchOption.AllDirectories))
-                {
-                    File.Delete(file);
-                }
-                
-                foreach (string file in Directory.EnumerateFiles("data/custom/", "*.*", SearchOption.AllDirectories))
-                {
-                    File.Delete(file);
-                }
+                if (Directory.Exists("data/logs"))
+                    foreach (string file in Directory.EnumerateFiles("data/logs/", "*.*", SearchOption.AllDirectories))
+                    {
+                        File.Delete(file);
+                    }
+
+                if (Directory.Exists("data/custom"))
+                    foreach (string file in Directory.EnumerateFiles("data/custom/", "*.*", SearchOption.AllDirectories))
+                    {
+                        File.Delete(file);
+                    }
+
+                var cfg_file = new CWRItem("data/config.cfg");
+                cfg_file.SetOrAddItem("write_log", false);
+                Loger.isLog = false;
+
+                if (File.Exists("data/custom-c.cfg")) File.Delete("data/custom-c.cfg");
+
                 MessageBox.Show("Программа подготовлна к удалению.");
             }
             catch(Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
         }
 
