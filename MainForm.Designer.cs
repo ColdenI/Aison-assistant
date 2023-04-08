@@ -69,6 +69,9 @@ namespace Aison___assistant
             this.подготовитьКУдалениюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьМестоНаДискеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.isAisonAct_indi = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.панельКомандToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,7 +112,7 @@ namespace Aison___assistant
             this.button_actAison.Location = new System.Drawing.Point(0, 446);
             this.button_actAison.Margin = new System.Windows.Forms.Padding(4);
             this.button_actAison.Name = "button_actAison";
-            this.button_actAison.Size = new System.Drawing.Size(371, 64);
+            this.button_actAison.Size = new System.Drawing.Size(365, 64);
             this.button_actAison.TabIndex = 0;
             this.button_actAison.Text = "Позвать";
             this.button_actAison.UseVisualStyleBackColor = true;
@@ -128,7 +131,7 @@ namespace Aison___assistant
             this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(586, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(578, 27);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -141,7 +144,10 @@ namespace Aison___assistant
             this.toolStripSeparator2,
             this.debagToolStripMenuItem,
             this.автозапускToolStripMenuItem,
-            this.дополнительноToolStripMenuItem});
+            this.дополнительноToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.настройкиToolStripMenuItem,
+            this.выходToolStripMenuItem});
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
             this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
@@ -413,6 +419,25 @@ namespace Aison___assistant
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(333, 6);
+            // 
+            // настройкиToolStripMenuItem
+            // 
+            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
+            this.настройкиToolStripMenuItem.Text = "Настройки";
+            this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem_Click);
+            // 
+            // выходToolStripMenuItem
+            // 
+            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
+            this.выходToolStripMenuItem.Text = "Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
+            // 
             // isAisonAct_indi
             // 
             this.isAisonAct_indi.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -488,7 +513,7 @@ namespace Aison___assistant
             this.textBox_log_message.Location = new System.Drawing.Point(0, 16);
             this.textBox_log_message.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_log_message.Name = "textBox_log_message";
-            this.textBox_log_message.Size = new System.Drawing.Size(210, 494);
+            this.textBox_log_message.Size = new System.Drawing.Size(208, 494);
             this.textBox_log_message.TabIndex = 3;
             this.textBox_log_message.Text = "";
             // 
@@ -501,7 +526,7 @@ namespace Aison___assistant
             this.listBox_custom_command.Location = new System.Drawing.Point(4, 51);
             this.listBox_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.listBox_custom_command.Name = "listBox_custom_command";
-            this.listBox_custom_command.Size = new System.Drawing.Size(363, 391);
+            this.listBox_custom_command.Size = new System.Drawing.Size(357, 391);
             this.listBox_custom_command.TabIndex = 4;
             // 
             // button_add_new_custom_command
@@ -512,7 +537,7 @@ namespace Aison___assistant
             this.button_add_new_custom_command.Location = new System.Drawing.Point(4, 19);
             this.button_add_new_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.button_add_new_custom_command.Name = "button_add_new_custom_command";
-            this.button_add_new_custom_command.Size = new System.Drawing.Size(363, 32);
+            this.button_add_new_custom_command.Size = new System.Drawing.Size(357, 32);
             this.button_add_new_custom_command.TabIndex = 5;
             this.button_add_new_custom_command.Text = "Добавить команду";
             this.button_add_new_custom_command.UseVisualStyleBackColor = true;
@@ -526,7 +551,7 @@ namespace Aison___assistant
             this.button_edit_custom_command.Location = new System.Drawing.Point(0, 0);
             this.button_edit_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.button_edit_custom_command.Name = "button_edit_custom_command";
-            this.button_edit_custom_command.Size = new System.Drawing.Size(363, 32);
+            this.button_edit_custom_command.Size = new System.Drawing.Size(357, 32);
             this.button_edit_custom_command.TabIndex = 6;
             this.button_edit_custom_command.Text = "Редактировать";
             this.button_edit_custom_command.UseVisualStyleBackColor = true;
@@ -540,7 +565,7 @@ namespace Aison___assistant
             this.button_remove_command.Location = new System.Drawing.Point(0, 32);
             this.button_remove_command.Margin = new System.Windows.Forms.Padding(4);
             this.button_remove_command.Name = "button_remove_command";
-            this.button_remove_command.Size = new System.Drawing.Size(363, 32);
+            this.button_remove_command.Size = new System.Drawing.Size(357, 32);
             this.button_remove_command.TabIndex = 7;
             this.button_remove_command.Text = "Удалить";
             this.button_remove_command.UseVisualStyleBackColor = true;
@@ -556,7 +581,7 @@ namespace Aison___assistant
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(371, 446);
+            this.groupBox1.Size = new System.Drawing.Size(365, 446);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ваши команды";
@@ -569,7 +594,7 @@ namespace Aison___assistant
             this.panel1.Location = new System.Drawing.Point(4, 377);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(363, 65);
+            this.panel1.Size = new System.Drawing.Size(357, 65);
             this.panel1.TabIndex = 10;
             // 
             // splitContainer1
@@ -589,8 +614,8 @@ namespace Aison___assistant
             this.splitContainer1.Panel2.AllowDrop = true;
             this.splitContainer1.Panel2.Controls.Add(this.textBox_log_message);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Size = new System.Drawing.Size(586, 510);
-            this.splitContainer1.SplitterDistance = 371;
+            this.splitContainer1.Size = new System.Drawing.Size(578, 510);
+            this.splitContainer1.SplitterDistance = 365;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 9;
             // 
@@ -614,7 +639,7 @@ namespace Aison___assistant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 537);
+            this.ClientSize = new System.Drawing.Size(578, 537);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -696,6 +721,9 @@ namespace Aison___assistant
         private System.Windows.Forms.ToolStripMenuItem какРаботаетПрограммаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem скрытьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem очиститьМестоНаДискеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
     }
 }
 

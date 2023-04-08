@@ -499,6 +499,11 @@ namespace Aison___assistant
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            OpenSettingsWindow();
+        }
+
+        private void OpenSettingsWindow()
+        {
             timer1.Stop();
             timer1.Start();
             new SettingsForm().ShowDialog();
@@ -600,6 +605,16 @@ namespace Aison___assistant
             if(File.Exists("x86_MicrosoftSpeechPlatformSDK.msi")) File.Delete("x86_MicrosoftSpeechPlatformSDK.msi");
             if (File.Exists("MSSpeech_TTS_ru-RU_Elena.msi")) File.Delete("MSSpeech_TTS_ru-RU_Elena.msi");
 
+        }
+
+        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSettingsWindow();
+        }
+
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)
