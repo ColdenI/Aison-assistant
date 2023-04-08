@@ -115,7 +115,7 @@ namespace Aison___assistant
 
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            if (e.Result.Confidence > 0.7) 
+            if (e.Result.Confidence > 0.7 && Aison.isWork) 
             {
                 Console.WriteLine(e.Result.Text);
                 Loger.print("Command: " + e.Result.Text);
@@ -615,6 +615,11 @@ namespace Aison___assistant
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void играВГородаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Aison.OpenCityGame();
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)

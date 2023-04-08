@@ -146,6 +146,12 @@
     <Compile Include="ByeAisonForm.Designer.cs">
       <DependentUpon>ByeAisonForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CityGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CityGameForm.Designer.cs">
+      <DependentUpon>CityGameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Command.cs" />
     <Compile Include="CWRlibrary.cs" />
     <Compile Include="EditCommandsListForm.cs">
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ByeAisonForm.resx">
       <DependentUpon>ByeAisonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CityGameForm.resx">
+      <DependentUpon>CityGameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditCommandsListForm.resx">
       <DependentUpon>EditCommandsListForm.cs</DependentUpon>

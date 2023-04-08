@@ -57,6 +57,8 @@ namespace Aison___assistant
             this.яндексToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.googleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.всеЗарегистрированныеКомандыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.играВГородаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.debagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.писатьLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,6 +143,8 @@ namespace Aison___assistant
             this.новаяКомандаToolStripMenuItem,
             this.стандартныеToolStripMenuItem,
             this.всеЗарегистрированныеКомандыToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.играВГородаToolStripMenuItem,
             this.toolStripSeparator2,
             this.debagToolStripMenuItem,
             this.автозапускToolStripMenuItem,
@@ -325,6 +329,18 @@ namespace Aison___assistant
             this.всеЗарегистрированныеКомандыToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
             this.всеЗарегистрированныеКомандыToolStripMenuItem.Text = "Все зарегистрированные команды";
             this.всеЗарегистрированныеКомандыToolStripMenuItem.Click += new System.EventHandler(this.всеЗарегистрированныеКомандыToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(333, 6);
+            // 
+            // играВГородаToolStripMenuItem
+            // 
+            this.играВГородаToolStripMenuItem.Name = "играВГородаToolStripMenuItem";
+            this.играВГородаToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
+            this.играВГородаToolStripMenuItem.Text = "Игра в города";
+            this.играВГородаToolStripMenuItem.Click += new System.EventHandler(this.играВГородаToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -724,6 +740,8 @@ namespace Aison___assistant
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem играВГородаToolStripMenuItem;
     }
 }
 

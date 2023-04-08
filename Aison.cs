@@ -10,6 +10,7 @@ namespace Aison___assistant
     public class Aison
     {
         public bool isActive = false;
+        public bool isWork = true;
         public string[] Active_Words;
         public SpeechSynthesizer Say_sound;
         private string lastSay = "Я ничего не говорил";
@@ -178,6 +179,13 @@ namespace Aison___assistant
                 ,WindowStyle = ProcessWindowStyle.Hidden
             };
             Process.Start(proc);
+        }
+
+        public void OpenCityGame()
+        {
+            isWork = false;
+            var form = new CityGameForm();
+            form.ShowDialog();
         }
 
     }
