@@ -585,6 +585,23 @@ namespace Aison___assistant
             OpenEditStandartCommands("data/CW-AisonDeView.txt");
         }
 
+        private void очиститьМестоНаДискеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Продолжить процедуру по очистке диска:\n\t-Из папки программы будут удалены установочные файлы (MSSpeech_SR_ru-RU_TELE.msi, SpeechPlatformRuntime_x32.msi, x86_MicrosoftSpeechPlatformSDK.msi, MSSpeech_TTS_ru-RU_Elena.msi)\n\t-Будут удалены файлы log\n \nПродолжить?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel) return;
+
+            if (Directory.Exists("data/logs"))
+                foreach (string file in Directory.EnumerateFiles("data/logs/", "*.*", SearchOption.AllDirectories))
+                {
+                    File.Delete(file);
+                }
+
+            if (File.Exists("MSSpeech_SR_ru-RU_TELE.msi")) File.Delete("MSSpeech_SR_ru-RU_TELE.msi");
+            if (File.Exists("SpeechPlatformRuntime_x32.msi")) File.Delete("SpeechPlatformRuntime_x32.msi");
+            if(File.Exists("x86_MicrosoftSpeechPlatformSDK.msi")) File.Delete("x86_MicrosoftSpeechPlatformSDK.msi");
+            if (File.Exists("MSSpeech_TTS_ru-RU_Elena.msi")) File.Delete("MSSpeech_TTS_ru-RU_Elena.msi");
+
+        }
+
         static private bool ContainsItemInArray<T>(T[] arr, T i)
         {
             foreach (T _i in arr)
