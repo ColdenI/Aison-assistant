@@ -256,7 +256,7 @@ namespace Aison___assistant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 318);
+            this.ClientSize = new System.Drawing.Size(848, 275);
             this.Controls.Add(this.label_sensitivity);
             this.Controls.Add(this.button_sensitivity);
             this.Controls.Add(this.trackBar_sensitivity);
