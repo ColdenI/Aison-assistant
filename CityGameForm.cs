@@ -11,8 +11,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Text;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -106,6 +104,9 @@ namespace Aison___assistant
 
         private void CityGameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            sre.Dispose();
+            synth.Dispose();
+            this.Dispose();
             MainForm.Aison.isWork = true;
         }
 
