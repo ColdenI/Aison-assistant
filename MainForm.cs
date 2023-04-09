@@ -29,6 +29,9 @@ namespace Aison___assistant
         public MainForm()
         {
             InitializeComponent();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            this.KeyPreview = true;
+
 
             Loger.print("The program is running.");
             Load_DATA();
@@ -113,6 +116,24 @@ namespace Aison___assistant
             synth.SelectVoice(voices[0].VoiceInfo.Name);
 
             synth.Volume = AisonVoiseVolume;
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.N && e.Modifiers == Keys.Control) Open_AddCommand();
+            if (e.KeyCode == Keys.E && e.Modifiers == Keys.Control) Open_EditCommand();
+            if (e.KeyCode == Keys.A && e.Modifiers == Keys.Control) 
+            {
+                if (!Aison.isActive)
+                {
+                    Aison.Active();
+                    timer_aison_activ.Stop();
+                    timer_aison_activ.Start();
+                    UI_Update();
+                }
+            }
+            if (e.KeyCode == Keys.Delete) DeleteCommand();
+
         }
 
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -231,7 +252,8 @@ namespace Aison___assistant
             AisonVoiseVolume = cfg_file.GetItemInt("aison_volume");
             if (cfg_file.GetItemString("PRc_user") == PRcode) isPRactive = true;
             toolStripButton_bye_aison.Visible = !isPRactive;
-            windowsToolStripMenuItem.Enabled = isPRactive;
+            купитьAisonToolStripMenuItem.Visible = !isPRactive;
+            //windowsToolStripMenuItem.Enabled = isPRactive;
             timer1.Interval = cfg_file.GetItemInt("del_view_time");
             sensitivity = cfg_file.GetItemFloat("sensitivity");
 
@@ -365,6 +387,11 @@ namespace Aison___assistant
         }
 
         private void button1_Click_1(object sender, EventArgs e)
+        {
+            DeleteCommand();
+        }
+
+        private void DeleteCommand()
         {
             if (listBox_custom_command.SelectedIndex == -1) return;
             if (MessageBox.Show("Вы уверенны, что хотите удалить элемент?\nВосстановить будет невозможно!", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) return;
@@ -648,6 +675,32 @@ namespace Aison___assistant
         private void играВГородаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenEditStandartCommands("data/CW-CityGame.txt");
+        }
+
+        private void редактироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Open_EditCommand();
+        }
+
+        private void удалитьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DeleteCommand();
+        }
+
+        private void активироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Aison.isActive)
+            {
+                Aison.Active();
+                timer_aison_activ.Stop();
+                timer_aison_activ.Start();
+                UI_Update();
+            }
+        }
+
+        private void купитьAisonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Open_ByeAisonForm();
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)

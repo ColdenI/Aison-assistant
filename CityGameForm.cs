@@ -3,16 +3,11 @@ using Microsoft.Speech.Recognition;
 using Microsoft.Speech.Synthesis;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Media;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Aison___assistant
@@ -107,6 +102,7 @@ namespace Aison___assistant
             sre.Dispose();
             synth.Dispose();
             this.Dispose();
+            MainForm.Aison.Active();
             MainForm.Aison.isWork = true;
         }
 

@@ -41,13 +41,13 @@ namespace Aison___assistant
             this.label4 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label_delayOffView = new System.Windows.Forms.Label();
             this.button_delayOffView = new System.Windows.Forms.Button();
             this.trackBar_delayOffView = new System.Windows.Forms.TrackBar();
             this.label_sensitivity = new System.Windows.Forms.Label();
             this.button_sensitivity = new System.Windows.Forms.Button();
             this.trackBar_sensitivity = new System.Windows.Forms.TrackBar();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_volue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_timeAct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_delayOffView)).BeginInit();
@@ -69,7 +69,7 @@ namespace Aison___assistant
             // trackBar_volue
             // 
             this.trackBar_volue.Location = new System.Drawing.Point(247, 15);
-            this.trackBar_volue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBar_volue.Margin = new System.Windows.Forms.Padding(4);
             this.trackBar_volue.Maximum = 100;
             this.trackBar_volue.Name = "trackBar_volue";
             this.trackBar_volue.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -83,7 +83,7 @@ namespace Aison___assistant
             this.button_volue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_volue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_volue.Location = new System.Drawing.Point(663, 23);
-            this.button_volue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_volue.Margin = new System.Windows.Forms.Padding(4);
             this.button_volue.Name = "button_volue";
             this.button_volue.Size = new System.Drawing.Size(151, 39);
             this.button_volue.TabIndex = 2;
@@ -118,7 +118,7 @@ namespace Aison___assistant
             this.button_timeAct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_timeAct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_timeAct.Location = new System.Drawing.Point(663, 86);
-            this.button_timeAct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_timeAct.Margin = new System.Windows.Forms.Padding(4);
             this.button_timeAct.Name = "button_timeAct";
             this.button_timeAct.Size = new System.Drawing.Size(151, 39);
             this.button_timeAct.TabIndex = 4;
@@ -129,7 +129,7 @@ namespace Aison___assistant
             // trackBar_timeAct
             // 
             this.trackBar_timeAct.Location = new System.Drawing.Point(247, 78);
-            this.trackBar_timeAct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBar_timeAct.Margin = new System.Windows.Forms.Padding(4);
             this.trackBar_timeAct.Maximum = 180;
             this.trackBar_timeAct.Minimum = 5;
             this.trackBar_timeAct.Name = "trackBar_timeAct";
@@ -164,6 +164,18 @@ namespace Aison___assistant
             this.label.Text = "Задержка на исчезновение:";
             this.toolTip1.SetToolTip(this.label, "Время через которое Aison скроется. (в секундах)");
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(20, 220);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(222, 17);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Чувствительность распознания:";
+            this.toolTip1.SetToolTip(this.label3, "Чувствительность распознания (20 - 100)");
+            // 
             // label_delayOffView
             // 
             this.label_delayOffView.AutoSize = true;
@@ -180,7 +192,7 @@ namespace Aison___assistant
             this.button_delayOffView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_delayOffView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_delayOffView.Location = new System.Drawing.Point(663, 149);
-            this.button_delayOffView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_delayOffView.Margin = new System.Windows.Forms.Padding(4);
             this.button_delayOffView.Name = "button_delayOffView";
             this.button_delayOffView.Size = new System.Drawing.Size(151, 39);
             this.button_delayOffView.TabIndex = 6;
@@ -191,7 +203,7 @@ namespace Aison___assistant
             // trackBar_delayOffView
             // 
             this.trackBar_delayOffView.Location = new System.Drawing.Point(247, 140);
-            this.trackBar_delayOffView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBar_delayOffView.Margin = new System.Windows.Forms.Padding(4);
             this.trackBar_delayOffView.Maximum = 3600;
             this.trackBar_delayOffView.Minimum = 30;
             this.trackBar_delayOffView.Name = "trackBar_delayOffView";
@@ -240,23 +252,11 @@ namespace Aison___assistant
             this.trackBar_sensitivity.Value = 30;
             this.trackBar_sensitivity.Scroll += new System.EventHandler(this.trackBar_sensitivity_Scroll);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(20, 220);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(222, 17);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Чувствительность распознания:";
-            this.toolTip1.SetToolTip(this.label3, "Чувствительность распознания (20 - 100)");
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 275);
+            this.ClientSize = new System.Drawing.Size(839, 275);
             this.Controls.Add(this.label_sensitivity);
             this.Controls.Add(this.button_sensitivity);
             this.Controls.Add(this.trackBar_sensitivity);
@@ -275,7 +275,7 @@ namespace Aison___assistant
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsForm";
