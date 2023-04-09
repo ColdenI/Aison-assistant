@@ -1,5 +1,6 @@
 ﻿using CWR;
 using System;
+using System.IO;
 using System.IO.Ports;
 using System.Net;
 using System.Windows.Forms;
@@ -34,6 +35,8 @@ namespace Aison___assistant
         {
             try
             {
+                if (!File.Exists("data/custom/" + path)) return;
+
                 var item = new CWRItem("data/custom/" + path);
                 Path = path;
                 Commands = item.GetItemString("coms");

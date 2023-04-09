@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Media;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,6 +31,7 @@ namespace Aison___assistant
         private List<string> citysWords;
         private List<string> cityEx;
         private int score = 0;
+        private int MaxScore = 0;
 
         private const string PathFileWordsCity = "data/CityGame-citys.txt";
 
@@ -53,6 +56,14 @@ namespace Aison___assistant
             lang_out = cfg_file.GetItemString("lang_out");
             AisonVoiseVolume = cfg_file.GetItemInt("aison_volume");
 
+
+            var cgd_file = new CWRItem("data/CityGame-data.cfg");
+            if (!cgd_file.ContainsItem("max_score")) cgd_file.AddItem("max_score", 0);
+            if (!cgd_file.ContainsItem("sensitivity")) cgd_file.AddItem("sensitivity", 40);
+            
+            MaxScore = cgd_file.GetItemInt("max_score");
+            label_maxScore.Text = MaxScore.ToString();
+            trackBar1.Value = cgd_file.GetItemInt("sensitivity");
         }
 
         private void CityGameForm_Load(object sender, EventArgs e)
@@ -100,7 +111,7 @@ namespace Aison___assistant
 
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            if (e.Result.Confidence > 0.4)
+            if (e.Result.Confidence > trackBar1.Value / 100)
             {
                 ApplyLogicGame(e.Result.Text.ToString());
             }
@@ -147,9 +158,12 @@ namespace Aison___assistant
             Loger.print("City Game - text: " + text);
             label_old_old_city.Text = label_old_city.Text;
             label_old_city.Text = text;
-            score++;
-            label_score.Text = score.ToString();
+            ScoreWork();
             cityEx.Add(text);
+
+            this.Update();
+
+            Thread.Sleep(new Random().Next(200, 400));
 
             // AI
             string textAI = GetCity_CityGame();
@@ -170,11 +184,26 @@ namespace Aison___assistant
                 label_old_old_city.Text = label_old_city.Text;
                 label_old_city.Text = textAI;
                 cityEx.Add(textAI);
+                this.Update();
+                synth.Speak(textAI);
             }
 
             using (var soundPlayer = new SoundPlayer("media\\de_act.wav"))
             {
                 soundPlayer.Play();
+            }
+        }
+
+        private void ScoreWork()
+        {
+            score++;
+            label_score.Text = score.ToString();
+            if(score > MaxScore)
+            {
+                MaxScore = score;
+                label_maxScore.Text = MaxScore.ToString();
+                var cgd_file = new CWRItem("data/CityGame-data.cfg");
+                cgd_file.SetOrAddItem("max_score", MaxScore);
             }
         }
 
@@ -217,6 +246,22 @@ namespace Aison___assistant
             string text = GetCity_CityGame();
             if (text == null) MessageBox.Show("Больше слов не осталось!", "Ой...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             textBox_text.Text = text;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            var cgd_file = new CWRItem("data/CityGame-data.cfg");
+            cgd_file.SetOrAddItem("sensitivity", trackBar1.Value);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists("media/CityGame-doc.html"))
+            {
+                MessageBox.Show("Error! file not fuond: media/CityGame-doc.html", "error");
+                return;
+            }
+            Process.Start("media\\CityGame-doc.html");
         }
 
         private void SaveCitysWordsInFile()

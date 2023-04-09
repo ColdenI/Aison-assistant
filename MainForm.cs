@@ -185,7 +185,14 @@ namespace Aison___assistant
             else isAisonAct_indi.BackColor = Color.Salmon;
 
             listBox_custom_command.Items.Clear();
-            foreach (Command i in Aison.commands) listBox_custom_command.Items.Add(i.Path);
+            try
+            {
+                foreach (Command i in Aison.commands) listBox_custom_command.Items.Add(i.Path);
+            }catch (Exception e)
+            {
+                MessageBox.Show($"Произошла критическая ошибка и файлом дополнительных команд!\nПопробуйте удалить:\n{Path.GetFullPath("data\\custom-c.cfg")}\nИли переустановите программу.");
+                Application.Exit();
+            }
         }
 
         private void timer_aison_activ_Tick(object sender, EventArgs e)
@@ -238,7 +245,16 @@ namespace Aison___assistant
                 arr.AddRange(new CWRFile("data/custom-c.cfg").Read().Split(new string[] { ";" }, StringSplitOptions.None));
                 arr.RemoveAt(arr.Count - 1);
                 foreach (string i in arr)
-                    Aison.commands.Add(new Command(i));
+                {
+                    var newC = new Command(i);
+                    if(newC == null)
+                    {
+                        MessageBox.Show("File error or not found: " + i);
+                    }
+                    else
+                        Aison.commands.Add(newC);
+                }
+                    
             }
 
 
