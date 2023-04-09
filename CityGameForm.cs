@@ -163,7 +163,7 @@ namespace Aison___assistant
 
             this.Update();
 
-            Thread.Sleep(new Random().Next(200, 400));
+            Thread.Sleep(new Random().Next(100, 350));
 
             // AI
             string textAI = GetCity_CityGame();
@@ -233,7 +233,8 @@ namespace Aison___assistant
 
         private string GetCity_CityGame()
         {
-            List<string> list = citysWords;
+            List<string> list = new List<string>();
+            list.AddRange(citysWords);
             List<string> list_ = new List<string>();
             foreach(string i in cityEx) if(citysWords.Contains(i)) list.Remove(i);
             foreach(string i in list) if(CheckCityGaweWord(i)) list_.Add(i);

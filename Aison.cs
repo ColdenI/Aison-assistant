@@ -187,6 +187,7 @@ namespace Aison___assistant
             var form = new CityGameForm();
             //form.Show();
             DeActive();
+            Obj_MainForm.Update();
             form.ShowDialog();
             form = null;
         }
