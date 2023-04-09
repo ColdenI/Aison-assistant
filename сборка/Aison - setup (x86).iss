@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Aison"
-#define MyAppVersion "1.0.0.0"
+#define MyAppVersion "1.0.1.0"
 #define MyAppPublisher "Colden I Production"
 #define MyAppExeName "Aison.exe"
 
@@ -33,8 +33,8 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\Мои работы\C# - Project\Aison - assistant\сборка\x86\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Мои работы\C# - Project\Aison - assistant\сборка\x86\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Мои работы\C# - Project\Aison - assistant\сборка\для x86\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Мои работы\C# - Project\Aison - assistant\сборка\для x86\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
