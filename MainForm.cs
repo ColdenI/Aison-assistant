@@ -20,6 +20,7 @@ namespace Aison___assistant
         private string lang_In = "ru-ru", lang_out = "ru-RU";
         public static Aison Aison = new Aison();
         private int AisonVoiseVolume = 100;
+        private float sensitivity = 0.7f;
 
         static private SpeechRecognitionEngine sre;
         private SpeechSynthesizer synth;
@@ -116,7 +117,7 @@ namespace Aison___assistant
 
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            if (e.Result.Confidence > 0.7 && Aison.isWork) 
+            if (e.Result.Confidence > sensitivity && Aison.isWork) 
             {
                 Console.WriteLine(e.Result.Text);
                 Loger.print("Command: " + e.Result.Text);
@@ -218,6 +219,7 @@ namespace Aison___assistant
             if (!cfg_file.ContainsItem("aison_volume")) cfg_file.AddItem("aison_volume", 100);
             if (!cfg_file.ContainsItem("PRc_user")) cfg_file.AddItem("PRc_user", "");
             if (!cfg_file.ContainsItem("del_view_time")) cfg_file.AddItem("del_view_time", 60000);
+            if (!cfg_file.ContainsItem("sensitivity")) cfg_file.AddItem("sensitivity", 0.7);
 
             lang_In = cfg_file.GetItemString("lang_in");
             lang_out = cfg_file.GetItemString("lang_out");
@@ -231,8 +233,10 @@ namespace Aison___assistant
             toolStripButton_bye_aison.Visible = !isPRactive;
             windowsToolStripMenuItem.Enabled = isPRactive;
             timer1.Interval = cfg_file.GetItemInt("del_view_time");
+            sensitivity = cfg_file.GetItemFloat("sensitivity");
 
-            
+
+
             if (!Check_ExistFile(new string[] {
                 "data/AW.txt", "data/CW-time.txt" , "data/CW-data.txt" , "data/CW-replayLastMessage.txt" , "data/CW-AisonSleep.txt",
                 "data/CW-AisonClose.txt","data/CW-MediaPause.txt","data/CW-MediaNext.txt","data/CW-MediaPrev.txt","data/CW-OpenCalc.txt", "data/CW-OpenExplorer.txt",
@@ -643,7 +647,7 @@ namespace Aison___assistant
 
         private void играВГородаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            OpenEditStandartCommands("data/CW-time.txt");
+            OpenEditStandartCommands("data/CW-CityGame.txt");
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)

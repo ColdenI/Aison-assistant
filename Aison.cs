@@ -187,11 +187,11 @@ namespace Aison___assistant
             var form = new CityGameForm();
             //form.Show();
             DeActive();
-            Obj_MainForm.Text = Obj_MainForm.Text + " - Загрузка";
+            Obj_MainForm.Text = Obj_MainForm.Text + " - Игра в города";
             Obj_MainForm.Enabled = false;
             Obj_MainForm.Update();
             form.ShowDialog();
-            Obj_MainForm.Text = Obj_MainForm.Text.Split(new string[] {" - Загрузка" }, StringSplitOptions.None)[0];
+            Obj_MainForm.Text = Obj_MainForm.Text.Split(new string[] { " - Игра в города" }, StringSplitOptions.None)[0];
             Obj_MainForm.Enabled = true;
             Obj_MainForm.Update();
         }

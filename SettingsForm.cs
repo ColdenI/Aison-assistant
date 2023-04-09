@@ -30,6 +30,9 @@ namespace Aison___assistant
 
             trackBar_delayOffView.Value = cfg_file.GetItemInt("del_view_time") / 1000;
             label_delayOffView.Text = (cfg_file.GetItemInt("del_view_time") / 1000).ToString();
+
+            trackBar_sensitivity.Value = (int)(cfg_file.GetItemFloat("sensitivity") * 100);
+            label_sensitivity.Text = (cfg_file.GetItemFloat("sensitivity") * 100).ToString();
         }
 
         private void button_volue_Click(object sender, EventArgs e)
@@ -66,6 +69,18 @@ namespace Aison___assistant
         private void trackBar_delayOffView_Scroll(object sender, EventArgs e)
         {
             label_delayOffView.Text = trackBar_delayOffView.Value.ToString();
+        }
+
+        private void trackBar_sensitivity_Scroll(object sender, EventArgs e)
+        {
+            label_sensitivity.Text = trackBar_sensitivity.Value.ToString();
+        }
+
+        private void button_sensitivity_Click(object sender, EventArgs e)
+        {
+            var cfg_file = new CWRItem("data/config.cfg");
+            cfg_file.SetOrAddItem("sensitivity", trackBar_sensitivity.Value / 100f);
+            if (MessageBox.Show("Изменения вступят в силу только после перезапуска программы.\nХотите перезапустить её сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
         }
     }
 }
