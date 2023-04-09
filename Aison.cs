@@ -24,7 +24,7 @@ namespace Aison___assistant
         }
 
         public string[] TCom_Time, TCom_Data, TCom_replayLast, TCom_aisonSleep, TCom_aisonClose, TCom_MediaPause, TCom_MediaNext, TCom_MediaPrev, TCom_ProcessCalc, TCom_Explorer,
-            TCom_WebBrowser, TCom_WebBrowser_Yandex, TCom_WebBrowser_Google, TCom_WindowsRes, TCom_WindowsOff, TCom_WindowsSleep, TCom_aisonRes, TCom_aisonDeView;
+            TCom_WebBrowser, TCom_WebBrowser_Yandex, TCom_WebBrowser_Google, TCom_WindowsRes, TCom_WindowsOff, TCom_WindowsSleep, TCom_aisonRes, TCom_aisonDeView, TCom_playCityGame;
 
 
         public void Active()
@@ -187,9 +187,13 @@ namespace Aison___assistant
             var form = new CityGameForm();
             //form.Show();
             DeActive();
+            Obj_MainForm.Text = Obj_MainForm.Text + " - Загрузка";
+            Obj_MainForm.Enabled = false;
             Obj_MainForm.Update();
             form.ShowDialog();
-            form = null;
+            Obj_MainForm.Text = Obj_MainForm.Text.Split(new string[] {" - Загрузка" }, StringSplitOptions.None)[0];
+            Obj_MainForm.Enabled = true;
+            Obj_MainForm.Update();
         }
 
     }

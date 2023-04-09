@@ -64,6 +64,7 @@ namespace Aison___assistant
                 _comms.AddRange(Aison.TCom_WindowsSleep);
                 _comms.AddRange(Aison.TCom_aisonRes);
                 _comms.AddRange(Aison.TCom_aisonDeView);
+                _comms.AddRange(Aison.TCom_playCityGame);
 
                 // мои кастомные команды регистрация
                 _comms.AddRange(new string[] {"как тебя зовут", "кто ты такой" });
@@ -150,6 +151,7 @@ namespace Aison___assistant
                     if (ContainsItemInArray<string>(Aison.TCom_WindowsSleep, e.Result.Text)) Aison.Com_Windows_Sleep();
                     if (ContainsItemInArray<string>(Aison.TCom_aisonRes, e.Result.Text)) Aison.Com_AisonProgramReStart();
                     if (ContainsItemInArray<string>(Aison.TCom_aisonDeView, e.Result.Text)) Aison.Com_aisonDeView();
+                    if (ContainsItemInArray<string>(Aison.TCom_playCityGame, e.Result.Text)) Aison.OpenCityGame();
 
                     if (ContainsItemInArray<string>(new string[] { "как тебя зовут", "кто ты такой" }, e.Result.Text)) Aison.Say("меня зовут эйсон. я ваш голосовой ассистент");
 
@@ -235,7 +237,7 @@ namespace Aison___assistant
                 "data/AW.txt", "data/CW-time.txt" , "data/CW-data.txt" , "data/CW-replayLastMessage.txt" , "data/CW-AisonSleep.txt",
                 "data/CW-AisonClose.txt","data/CW-MediaPause.txt","data/CW-MediaNext.txt","data/CW-MediaPrev.txt","data/CW-OpenCalc.txt", "data/CW-OpenExplorer.txt",
                 "data/CW-OpenWebBrowser.txt","data/CW-OpenWebBrowser_Yandex.txt","data/CW-OpenWebBrowser_Google.txt","data/CW-WindowsOff.txt","data/CW-WindowsRes.txt",
-                "data/CW-WindowsSleep.txt", "data/CW-AisonRes.txt", "data/CW-AisonDeViev.txt"
+                "data/CW-WindowsSleep.txt", "data/CW-AisonRes.txt", "data/CW-AisonDeViev.txt", "data/CW-CityGame.txt"
             })) { }
 
             // загрузить список файлов с кастомными командами
@@ -278,6 +280,7 @@ namespace Aison___assistant
             Aison.TCom_WindowsSleep = new CWRFile("data/CW-WindowsSleep.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
             Aison.TCom_aisonRes = new CWRFile("data/CW-AisonRes.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
             Aison.TCom_aisonDeView = new CWRFile("data/CW-AisonDeViev.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
+            Aison.TCom_playCityGame = new CWRFile("data/CW-CityGame.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
 
             Loger.print("Loading data... end");
             UI_Update();
@@ -636,6 +639,11 @@ namespace Aison___assistant
         private void играВГородаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Aison.OpenCityGame();
+        }
+
+        private void играВГородаToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenEditStandartCommands("data/CW-time.txt");
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)
