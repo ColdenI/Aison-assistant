@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/сборка/Aison - setup (x86).exe
+/сборка/Aison - setup (any CPU).exe
