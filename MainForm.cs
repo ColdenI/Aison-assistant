@@ -133,6 +133,11 @@ namespace Aison___assistant
                 }
             }
             if (e.KeyCode == Keys.Delete) DeleteCommand();
+            if (e.KeyCode == Keys.C && e.Modifiers == Keys.Alt)
+            {
+                this.Visible = false;
+                timer1.Stop();
+            }
 
         }
 
@@ -652,7 +657,7 @@ namespace Aison___assistant
 
             if (File.Exists("MSSpeech_SR_ru-RU_TELE.msi")) File.Delete("MSSpeech_SR_ru-RU_TELE.msi");
             if (File.Exists("SpeechPlatformRuntime_x32.msi")) File.Delete("SpeechPlatformRuntime_x32.msi");
-            if(File.Exists("x86_MicrosoftSpeechPlatformSDK.msi")) File.Delete("x86_MicrosoftSpeechPlatformSDK.msi");
+            if (File.Exists("x86_MicrosoftSpeechPlatformSDK.msi")) File.Delete("x86_MicrosoftSpeechPlatformSDK.msi");
             if (File.Exists("MSSpeech_TTS_ru-RU_Elena.msi")) File.Delete("MSSpeech_TTS_ru-RU_Elena.msi");
 
         }
@@ -701,6 +706,19 @@ namespace Aison___assistant
         private void купитьAisonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Open_ByeAisonForm();
+        }
+
+        private void скрытьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            timer1.Stop();
+        }
+
+        private void управлениеГруппамиКомандToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new CommandGroudForm();
+            form.Owner = this;
+            form.ShowDialog();
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)

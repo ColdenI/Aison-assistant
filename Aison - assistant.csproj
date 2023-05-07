@@ -153,12 +153,24 @@
       <DependentUpon>CityGameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Command.cs" />
+    <Compile Include="CommandGroudForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommandGroudForm.Designer.cs">
+      <DependentUpon>CommandGroudForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CWRlibrary.cs" />
     <Compile Include="EditCommandsListForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditCommandsListForm.Designer.cs">
       <DependentUpon>EditCommandsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FindCommandGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindCommandGroupForm.Designer.cs">
+      <DependentUpon>FindCommandGroupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FindSerialPortForm.cs">
       <SubType>Form</SubType>
@@ -211,8 +223,14 @@
     <EmbeddedResource Include="CityGameForm.resx">
       <DependentUpon>CityGameForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CommandGroudForm.resx">
+      <DependentUpon>CommandGroudForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditCommandsListForm.resx">
       <DependentUpon>EditCommandsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindCommandGroupForm.resx">
+      <DependentUpon>FindCommandGroupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FindSerialPortForm.resx">
       <DependentUpon>FindSerialPortForm.cs</DependentUpon>

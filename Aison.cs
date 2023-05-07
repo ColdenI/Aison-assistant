@@ -56,11 +56,11 @@ namespace Aison___assistant
             }
         }
 
-        public void Say(string str)
+        public void Say(string str, bool isActAison = true)
         {
             lastSay = str;
             Say_sound.Speak(str);
-            Active();
+            if(isActAison)Active();
         }
 
         public void Save_CustomCommandsFile()
@@ -140,7 +140,7 @@ namespace Aison___assistant
                 Active();
             }
         }
-        public void Com_Windows_Off()
+        public void Com_Windows_Off() 
         {
             Obj_MainForm.BringToFront();
             if (MessageBox.Show("Вы уверенны что хотите выключить ПК?", "?", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)

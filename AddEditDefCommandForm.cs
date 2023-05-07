@@ -25,13 +25,14 @@ namespace Aison___assistant
             InitializeComponent();
             MainForm_ = this.Owner as MainForm;
             textBox4.Enabled = false;
-            if (command.Type == Command.EType.Serial || command.Type == Command.EType.Exe) textBox4.Enabled = true;
+            if (command.Type == Command.EType.SERIAL || command.Type == Command.EType.EXE) textBox4.Enabled = true;
 
             textBox2.Text = command.Path.Remove(command.Path.Length - 4, 4);
-            if (command.Type == Command.EType.Exe) comboBox1.SelectedItem = "EXE";
-            if (command.Type == Command.EType.Url) comboBox1.SelectedItem = "URL";
-            if (command.Type == Command.EType.Serial) comboBox1.SelectedItem = "SERIAL";
-            if (command.Type == Command.EType.Say) comboBox1.SelectedItem = "SAY";
+            if (command.Type == Command.EType.EXE) comboBox1.SelectedItem = "EXE";
+            if (command.Type == Command.EType.URL) comboBox1.SelectedItem = "URL";
+            if (command.Type == Command.EType.SERIAL) comboBox1.SelectedItem = "SERIAL";
+            if (command.Type == Command.EType.SAY) comboBox1.SelectedItem = "SAY";
+            if (command.Type == Command.EType.COMGP) comboBox1.SelectedItem = "COMGP";
             
             commands = command.Commands;
             textBox3.Text = command.Arg;
@@ -88,11 +89,12 @@ namespace Aison___assistant
                 MainForm.Aison.commands.Remove(command);
             }
 
-            Command.EType eType = Command.EType.Exe;
-            if (comboBox1.SelectedItem.ToString() == "EXE") eType = Command.EType.Exe;
-            if (comboBox1.SelectedItem.ToString() == "URL") eType = Command.EType.Url;
-            if (comboBox1.SelectedItem.ToString() == "SERIAL") eType = Command.EType.Serial;
-            if (comboBox1.SelectedItem.ToString() == "SAY") eType = Command.EType.Say;
+            Command.EType eType = Command.EType.EXE;
+            if (comboBox1.SelectedItem.ToString() == "EXE") eType = Command.EType.EXE;
+            if (comboBox1.SelectedItem.ToString() == "URL") eType = Command.EType.URL;
+            if (comboBox1.SelectedItem.ToString() == "SERIAL") eType = Command.EType.SERIAL;
+            if (comboBox1.SelectedItem.ToString() == "SAY") eType = Command.EType.SAY;
+            if (comboBox1.SelectedItem.ToString() == "COMGP") eType = Command.EType.COMGP;
             var new_comm = new Command();
             new_comm.Path = textBox2.Text + ".cfg";
             new_comm.Commands = commands;
@@ -119,10 +121,11 @@ namespace Aison___assistant
             cwrI.SetOrAddItem("path", new_comm.Path);
             cwrI.SetOrAddItem("coms", new_comm.Commands);
             string str = "";
-            if (new_comm.Type == Command.EType.Exe) str = "EXE";
-            if (new_comm.Type == Command.EType.Url) str = "URL";
-            if (new_comm.Type == Command.EType.Serial) str = "SERIAL";
-            if (new_comm.Type == Command.EType.Say) str = "SAY";
+            if (new_comm.Type == Command.EType.EXE) str = "EXE";
+            if (new_comm.Type == Command.EType.URL) str = "URL";
+            if (new_comm.Type == Command.EType.SERIAL) str = "SERIAL";
+            if (new_comm.Type == Command.EType.SAY) str = "SAY";
+            if (new_comm.Type == Command.EType.COMGP) str = "COMGP";
             cwrI.SetOrAddItem("type", str);
             cwrI.SetOrAddItem("arg1", new_comm.Arg);
             cwrI.SetOrAddItem("arg2", new_comm.Arg_2);
@@ -162,27 +165,44 @@ namespace Aison___assistant
 
         private void button3_Click(object sender, EventArgs e)
         {
+            textBox3.Text = GetFilePath();
+        }
+
+        public static string GetFilePath()
+        {
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == DialogResult.Cancel)
-                return;
+                return null;
 
-            textBox3.Text = ofd.FileName;
+            return ofd.FileName;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Если вы хотите открыть какой-то сайт, то используйте тип ‘EXE’. \nВведите url адрес или путь в аргумент.\nДля типа ‘EXE’ аргумент 2 передаётся в открывающуюся программу в качестве аргумента. \n(если ненужно оставить пустым)\n \nЕсли вы хотите выполнить url запрос, то используйте тип ‘URL’\n \nПри использовании типа ‘SERIAL’: \nаргумент 1 – COM-port и скорость через ';' пример: 'COM1;9600'\nаргумент 2 - запрос\n \nЕсли вы хотите чтобы программа произнесла текст используйте тип 'SAY'. \nВ аргумент передайте текст.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ViewMessageInfo();
+        }
+
+        public static void ViewMessageInfo()
+        {
+            MessageBox.Show("Если вы хотите открыть какой-то сайт, то используйте тип ‘EXE’. \nВведите url адрес или путь в аргумент.\nДля типа ‘EXE’ аргумент 2 передаётся в открывающуюся программу в качестве аргумента. \n(если ненужно оставить пустым)\n \nЕсли вы хотите выполнить url запрос, то используйте тип ‘URL’\n \nПри использовании типа ‘SERIAL’: \nаргумент 1 – COM-port и скорость через ';' пример: 'COM1;9600'\nаргумент 2 - запрос\n \nЕсли вы хотите чтобы программа произнесла текст используйте тип 'SAY'. \nВ аргумент передайте текст.\n \nЕсли вы хотите выполнить несколько действий одной командой используйте тип ‘COMGP’\nВ качестве аргумента передайте путь к файлу с инструкциями командной группы. (файлы .acg)", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            textBox3.Text = GetSerialPort();
+        }
+
+        public static string GetSerialPort()
+        {
+            string res = "";
             FindSerialPortForm form = new FindSerialPortForm();
             form.button2.Click += delegate (object sender_, EventArgs e_)
             {
-                textBox3.Text = form.comboBox1.Text + ";";
+                res = form.comboBox1.Text + ";";
                 form.Close();
             };
             form.ShowDialog();
+            return res;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,10 +16,12 @@ namespace Aison___assistant
     {
         private const int CountSecondCloseProgram = 15;
         private int SecCount = CountSecondCloseProgram;
+        private Process process;
 
-        public ProgramAlreadyOpenForm()
+        public ProgramAlreadyOpenForm(Process pr)
         {
             InitializeComponent();
+            process = pr;
             label2.Text = "Это окно закроется через: " + SecCount.ToString();
         }
 
@@ -32,6 +35,14 @@ namespace Aison___assistant
             SecCount--;
             label2.Text = "Это окно закроется через: " + SecCount.ToString();
             if (SecCount <= 0) Application.Exit();
+        }
+
+        private void button_restartPr_Click(object sender, EventArgs e)
+        {
+            process.Kill();
+            process.Close();
+
+            Application.Restart();
         }
     }
 }

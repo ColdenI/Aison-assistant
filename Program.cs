@@ -18,7 +18,7 @@ namespace Aison___assistant
             System.Threading.Thread.Sleep(500);
             Process pr = RI();
             if (pr != null)
-                Application.Run(new ProgramAlreadyOpenForm());
+                Application.Run(new ProgramAlreadyOpenForm(pr));
             else
                 Application.Run(new MainForm());
         }
