@@ -18,7 +18,19 @@ namespace Aison___assistant
         public CommandGroudForm()
         {
             InitializeComponent();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            this.KeyPreview = true;
             textBox_command_arg_2.Enabled = false;
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.N && e.Modifiers == Keys.Control) Create();
+            if (e.KeyCode == Keys.O && e.Modifiers == Keys.Control) Open();
+            if (e.KeyCode == Keys.S && e.Modifiers == Keys.Control && button_file_save.Enabled) SaveData();
+            if (e.KeyCode == Keys.F && e.Modifiers == Keys.Control) Find();
+            if (e.KeyCode == Keys.Delete && button_file_del.Enabled) Delete(); 
+            
         }
 
         private void LoadData()
@@ -125,6 +137,11 @@ namespace Aison___assistant
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            Create();
+        }
+
+        private void Create()
+        {
             var dlg = new SaveFileDialog();
             dlg.Filter = "Aison Command Group files (*.acg)|*.acg";
             dlg.InitialDirectory = new FileInfo("data/custom").FullName;
@@ -140,8 +157,13 @@ namespace Aison___assistant
 
         private void button_file_del_Click(object sender, EventArgs e)
         {
+            Delete();
+        }
+
+        private void Delete()
+        {
             if (File.Exists(Path) && MessageBox.Show("Вы уверены, что хотите удалить инструкцию группы команд?\nВосстановить будет нельзя!", "?", MessageBoxButtons.OKCancel) == DialogResult.OK)
-            { 
+            {
                 File.Delete(Path);
                 Path = null;
                 button_file_del.Enabled = false;
@@ -151,6 +173,11 @@ namespace Aison___assistant
         }
 
         private void button_file_open_Click(object sender, EventArgs e)
+        {
+            Open();
+        }
+
+        private void Open()
         {
             var ofd = new OpenFileDialog();
             ofd.InitialDirectory = new FileInfo("data/custom").FullName;
@@ -265,6 +292,11 @@ namespace Aison___assistant
         }
 
         private void button_file_find_Click(object sender, EventArgs e)
+        {
+            Find();
+        }
+
+        private void Find()
         {
             var form = new FindCommandGroupForm();
             form.Owner = this;
