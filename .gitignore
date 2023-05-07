@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /сборка/Aison - setup (x86).exe
 /сборка/Aison - setup (any CPU).exe
+/сборка/Aison - setup (any CPU).iss
+/сборка/Aison - setup (x86).iss
