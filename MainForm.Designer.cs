@@ -39,7 +39,9 @@ namespace Aison___assistant
             this.скрытьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.новаяКомандаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.импортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.исключитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.стандартныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +68,7 @@ namespace Aison___assistant
             this.играВГородаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.управлениеГруппамиКомандToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.всеЗарегистрированныеКомандыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.экспортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.играВГородаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -87,6 +90,7 @@ namespace Aison___assistant
             this.isAisonAct_indi = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.панельКомандToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.очиститьИсториюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_bye_aison = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripSplitButton();
@@ -101,6 +105,7 @@ namespace Aison___assistant
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -154,12 +159,15 @@ namespace Aison___assistant
             this.скрытьToolStripMenuItem1,
             this.toolStripSeparator7,
             this.новаяКомандаToolStripMenuItem,
+            this.импортToolStripMenuItem,
             this.редактироватьToolStripMenuItem,
+            this.исключитьToolStripMenuItem,
             this.удалитьToolStripMenuItem1,
             this.toolStripSeparator6,
             this.стандартныеToolStripMenuItem,
             this.управлениеГруппамиКомандToolStripMenuItem,
             this.всеЗарегистрированныеКомандыToolStripMenuItem,
+            this.экспортToolStripMenuItem,
             this.toolStripSeparator4,
             this.играВГородаToolStripMenuItem,
             this.toolStripSeparator2,
@@ -191,6 +199,7 @@ namespace Aison___assistant
             this.скрытьToolStripMenuItem1.ShortcutKeyDisplayString = "Alt + C";
             this.скрытьToolStripMenuItem1.Size = new System.Drawing.Size(336, 26);
             this.скрытьToolStripMenuItem1.Text = "Скрыть";
+            this.скрытьToolStripMenuItem1.ToolTipText = "Скрыть окно программы";
             this.скрытьToolStripMenuItem1.Click += new System.EventHandler(this.скрытьToolStripMenuItem1_Click);
             // 
             // toolStripSeparator7
@@ -204,7 +213,18 @@ namespace Aison___assistant
             this.новаяКомандаToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + N";
             this.новаяКомандаToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
             this.новаяКомандаToolStripMenuItem.Text = "Новая команда";
+            this.новаяКомандаToolStripMenuItem.ToolTipText = "Добавить новую команду в список";
             this.новаяКомандаToolStripMenuItem.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // импортToolStripMenuItem
+            // 
+            this.импортToolStripMenuItem.Name = "импортToolStripMenuItem";
+            this.импортToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + R";
+            this.импортToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
+            this.импортToolStripMenuItem.Text = "Зарегистрировать";
+            this.импортToolStripMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.импортToolStripMenuItem.ToolTipText = "Зарегистрировать файл команд в системе (импорт)";
+            this.импортToolStripMenuItem.Click += new System.EventHandler(this.импортToolStripMenuItem_Click);
             // 
             // редактироватьToolStripMenuItem
             // 
@@ -212,7 +232,17 @@ namespace Aison___assistant
             this.редактироватьToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + E";
             this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
             this.редактироватьToolStripMenuItem.Text = "Редактировать";
+            this.редактироватьToolStripMenuItem.ToolTipText = "Редактировать выделенный элемент списка";
             this.редактироватьToolStripMenuItem.Click += new System.EventHandler(this.редактироватьToolStripMenuItem_Click);
+            // 
+            // исключитьToolStripMenuItem
+            // 
+            this.исключитьToolStripMenuItem.Name = "исключитьToolStripMenuItem";
+            this.исключитьToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + U";
+            this.исключитьToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
+            this.исключитьToolStripMenuItem.Text = "Исключить";
+            this.исключитьToolStripMenuItem.ToolTipText = "Исключить выделенный элемент из списка";
+            this.исключитьToolStripMenuItem.Click += new System.EventHandler(this.исключитьToolStripMenuItem_Click);
             // 
             // удалитьToolStripMenuItem1
             // 
@@ -221,6 +251,7 @@ namespace Aison___assistant
             this.удалитьToolStripMenuItem1.ShortcutKeyDisplayString = "Del";
             this.удалитьToolStripMenuItem1.Size = new System.Drawing.Size(336, 26);
             this.удалитьToolStripMenuItem1.Text = "Удалить";
+            this.удалитьToolStripMenuItem1.ToolTipText = "Удалить выделенный элемент списка";
             this.удалитьToolStripMenuItem1.Click += new System.EventHandler(this.удалитьToolStripMenuItem1_Click);
             // 
             // toolStripSeparator6
@@ -249,6 +280,7 @@ namespace Aison___assistant
             this.стандартныеToolStripMenuItem.Name = "стандартныеToolStripMenuItem";
             this.стандартныеToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
             this.стандартныеToolStripMenuItem.Text = "Стандартные команды";
+            this.стандартныеToolStripMenuItem.ToolTipText = "Посмотреть / изменить стандартные команды ";
             // 
             // активацияToolStripMenuItem
             // 
@@ -404,6 +436,7 @@ namespace Aison___assistant
             this.управлениеГруппамиКомандToolStripMenuItem.Name = "управлениеГруппамиКомандToolStripMenuItem";
             this.управлениеГруппамиКомандToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
             this.управлениеГруппамиКомандToolStripMenuItem.Text = "Управление группами команд";
+            this.управлениеГруппамиКомандToolStripMenuItem.ToolTipText = "Открыть панель управления группами команд";
             this.управлениеГруппамиКомандToolStripMenuItem.Click += new System.EventHandler(this.управлениеГруппамиКомандToolStripMenuItem_Click);
             // 
             // всеЗарегистрированныеКомандыToolStripMenuItem
@@ -411,7 +444,15 @@ namespace Aison___assistant
             this.всеЗарегистрированныеКомандыToolStripMenuItem.Name = "всеЗарегистрированныеКомандыToolStripMenuItem";
             this.всеЗарегистрированныеКомандыToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
             this.всеЗарегистрированныеКомандыToolStripMenuItem.Text = "Все зарегистрированные команды";
+            this.всеЗарегистрированныеКомандыToolStripMenuItem.ToolTipText = "Показать все зарегистрированный команды";
             this.всеЗарегистрированныеКомандыToolStripMenuItem.Click += new System.EventHandler(this.всеЗарегистрированныеКомандыToolStripMenuItem_Click);
+            // 
+            // экспортToolStripMenuItem
+            // 
+            this.экспортToolStripMenuItem.Name = "экспортToolStripMenuItem";
+            this.экспортToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
+            this.экспортToolStripMenuItem.Text = "Экспорт команд";
+            this.экспортToolStripMenuItem.Click += new System.EventHandler(this.экспортToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -445,14 +486,14 @@ namespace Aison___assistant
             this.писатьLogToolStripMenuItem.CheckOnClick = true;
             this.писатьLogToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.писатьLogToolStripMenuItem.Name = "писатьLogToolStripMenuItem";
-            this.писатьLogToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.писатьLogToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.писатьLogToolStripMenuItem.Text = "Писать log";
             this.писатьLogToolStripMenuItem.CheckedChanged += new System.EventHandler(this.писатьLogToolStripMenuItem_CheckedChanged);
             // 
             // посмотретьLogToolStripMenuItem
             // 
             this.посмотретьLogToolStripMenuItem.Name = "посмотретьLogToolStripMenuItem";
-            this.посмотретьLogToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.посмотретьLogToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.посмотретьLogToolStripMenuItem.Text = "Посмотреть log";
             this.посмотретьLogToolStripMenuItem.Click += new System.EventHandler(this.посмотретьLogToolStripMenuItem_Click);
             // 
@@ -560,12 +601,14 @@ namespace Aison___assistant
             // toolStripSplitButton2
             // 
             this.toolStripSplitButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.панельКомандToolStripMenuItem});
+            this.панельКомандToolStripMenuItem,
+            this.очиститьИсториюToolStripMenuItem});
             this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
             this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton2.Name = "toolStripSplitButton2";
             this.toolStripSplitButton2.Size = new System.Drawing.Size(74, 24);
             this.toolStripSplitButton2.Text = "Вид";
+            this.toolStripSplitButton2.ToolTipText = "Скрыть окно программы";
             this.toolStripSplitButton2.ButtonClick += new System.EventHandler(this.toolStripSplitButton2_ButtonClick);
             // 
             // панельКомандToolStripMenuItem
@@ -574,9 +617,16 @@ namespace Aison___assistant
             this.панельКомандToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.панельКомандToolStripMenuItem.Enabled = false;
             this.панельКомандToolStripMenuItem.Name = "панельКомандToolStripMenuItem";
-            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.панельКомандToolStripMenuItem.Text = "Панель команд";
             this.панельКомандToolStripMenuItem.CheckedChanged += new System.EventHandler(this.панельКомандToolStripMenuItem_CheckedChanged);
+            // 
+            // очиститьИсториюToolStripMenuItem
+            // 
+            this.очиститьИсториюToolStripMenuItem.Name = "очиститьИсториюToolStripMenuItem";
+            this.очиститьИсториюToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.очиститьИсториюToolStripMenuItem.Text = "Очистить историю";
+            this.очиститьИсториюToolStripMenuItem.Click += new System.EventHandler(this.очиститьИсториюToolStripMenuItem_Click);
             // 
             // toolStripButton1
             // 
@@ -620,6 +670,7 @@ namespace Aison___assistant
             this.textBox_log_message.Location = new System.Drawing.Point(0, 16);
             this.textBox_log_message.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_log_message.Name = "textBox_log_message";
+            this.textBox_log_message.ReadOnly = true;
             this.textBox_log_message.Size = new System.Drawing.Size(207, 494);
             this.textBox_log_message.TabIndex = 3;
             this.textBox_log_message.Text = "";
@@ -647,6 +698,7 @@ namespace Aison___assistant
             this.button_add_new_custom_command.Size = new System.Drawing.Size(352, 32);
             this.button_add_new_custom_command.TabIndex = 5;
             this.button_add_new_custom_command.Text = "Добавить команду";
+            this.toolTip1.SetToolTip(this.button_add_new_custom_command, "Добавить новую команду в список");
             this.button_add_new_custom_command.UseVisualStyleBackColor = true;
             this.button_add_new_custom_command.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -661,6 +713,7 @@ namespace Aison___assistant
             this.button_edit_custom_command.Size = new System.Drawing.Size(352, 32);
             this.button_edit_custom_command.TabIndex = 6;
             this.button_edit_custom_command.Text = "Редактировать";
+            this.toolTip1.SetToolTip(this.button_edit_custom_command, "Редактировать выделенный элемент списка");
             this.button_edit_custom_command.UseVisualStyleBackColor = true;
             this.button_edit_custom_command.Click += new System.EventHandler(this.button_edit_custom_command_Click);
             // 
@@ -675,6 +728,7 @@ namespace Aison___assistant
             this.button_remove_command.Size = new System.Drawing.Size(352, 32);
             this.button_remove_command.TabIndex = 7;
             this.button_remove_command.Text = "Удалить";
+            this.toolTip1.SetToolTip(this.button_remove_command, "Удалить выделенный элемент списка");
             this.button_remove_command.UseVisualStyleBackColor = true;
             this.button_remove_command.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -843,6 +897,11 @@ namespace Aison___assistant
         private System.Windows.Forms.ToolStripMenuItem купитьAisonToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem скрытьToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem управлениеГруппамиКомандToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem очиститьИсториюToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem исключитьToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripMenuItem импортToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem экспортToolStripMenuItem;
     }
 }
 

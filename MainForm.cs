@@ -121,6 +121,8 @@ namespace Aison___assistant
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.N && e.Modifiers == Keys.Control) Open_AddCommand();
+            if (e.KeyCode == Keys.R && e.Modifiers == Keys.Control) RegistCommand();
+            if (e.KeyCode == Keys.U && e.Modifiers == Keys.Control) ExcludeCommand();
             if (e.KeyCode == Keys.E && e.Modifiers == Keys.Control) Open_EditCommand();
             if (e.KeyCode == Keys.A && e.Modifiers == Keys.Control) 
             {
@@ -404,6 +406,17 @@ namespace Aison___assistant
             Aison.commands.Remove(Aison.commands[listBox_custom_command.SelectedIndex]);
             Aison.Save_CustomCommandsFile();
             UI_Update();
+        }
+
+        private void ExcludeCommand()
+        {
+            if (listBox_custom_command.SelectedIndex == -1) return;
+            if (MessageBox.Show("Вы уверенны, что хотите исключить элемент?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) return;
+            Aison.commands.Remove(Aison.commands[listBox_custom_command.SelectedIndex]);
+            Aison.Save_CustomCommandsFile();
+            UI_Update();
+
+            if (MessageBox.Show("Чтобы изменения вступили в силу нужно перезапустить программу. Хотите сделать это сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
         }
 
         private void OpenEditStandartCommands(string path)
@@ -719,6 +732,166 @@ namespace Aison___assistant
             var form = new CommandGroudForm();
             form.Owner = this;
             form.ShowDialog();
+        }
+
+        private void очиститьИсториюToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox_log_message.Text = string.Empty;
+        }
+
+        private void исключитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExcludeCommand();
+        }
+
+        private void импортToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RegistCommand();
+        }
+
+        private void RegistCommand()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Path.GetFullPath("data/custom");
+            if (ofd.ShowDialog() == DialogResult.Cancel) return;
+            string in_file = ofd.FileName;
+            // находится в data/custom ?
+            if(Path.GetDirectoryName(in_file) != Path.GetFullPath("data/custom"))
+            {
+                // предложить переместить
+                if(DialogResult.OK == MessageBox.Show("Файл команд должен быть расположен по пути «..Aison/data/custom/file.cfg»\nХотите переместить файл?", "Ой!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
+                {
+                    File.Move(in_file, "data/custom/" + Path.GetFileName(in_file));
+
+                    in_file = Path.GetFullPath("data/custom/") + Path.GetFileName(in_file);
+                }
+            }   
+
+            // проверка на файл команд
+            CWRItem cwi;
+            try
+            {
+                cwi = new CWRItem("data/custom/" + Path.GetFileName(in_file));
+            }
+            catch
+            {
+                MessageBox.Show("Файл не является файлом команд или повреждён!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if(!cwi.ContainsItem("path") || !cwi.ContainsItem("coms") || !cwi.ContainsItem("type") || !cwi.ContainsItem("arg1"))
+            {
+                MessageBox.Show("Файл не является файлом команд или повреждён!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (cwi.GetItemString("path") != Path.GetFileName(in_file))
+            {
+                MessageBox.Show("Файл не является файлом команд или повреждён!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // проверка на есть ли такойже уже добавленый 
+            string[] arr = new string[listBox_custom_command.Items.Count];
+            for(int i =0;i<listBox_custom_command.Items.Count;i++) arr[i] = listBox_custom_command.Items[i].ToString();
+            if (ContainsItemInArray<string>(arr, Path.GetFileName(in_file).ToString()))
+            {
+                MessageBox.Show("Такой файл уже зарегистрирован!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var newC = new Command(Path.GetFileName(in_file));
+            if (newC == null)
+            {
+                MessageBox.Show("File error or not found: " + Path.GetFileName(in_file));
+                return;
+            }
+            else
+                Aison.commands.Add(newC);
+
+            Aison.Save_CustomCommandsFile();
+            UI_Update();
+            if (MessageBox.Show("Чтобы изменения вступили в силу нужно перезапустить программу. Хотите сделать это сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
+
+        }
+
+        private void ExportCommandFile()
+        {
+            /* выполнить экспорт (копирование) выделеного файла команд файла команд
+             * если тип "группа команд" то переместить и его тоже
+            */
+
+            if (listBox_custom_command.SelectedIndex == -1) return;
+            Command com = Aison.commands[listBox_custom_command.SelectedIndex];
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            //saveFileDialog.Filter = ".cfg|.cfg";
+            if(saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
+
+            string path_out = saveFileDialog.FileName;
+            string path_fn = saveFileDialog.FileName;
+            /* проврить наличие файлов
+             * перемесить в папку с такимже названием
+             * в папку положить если нужно файл с инструкциями командных групп
+            */
+            if (!File.Exists("data/custom/" + com.Path))
+            {
+                MessageBox.Show("Файл команд не найден!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //-----------------
+            path_out = Path.GetDirectoryName(path_out + "/" + Path.GetFileName(path_out)) + " - exporting Aison command file";
+            if (Directory.Exists(path_out)) 
+            {
+                if (DialogResult.OK == MessageBox.Show("Файл с таким названием уже экспортирован! Хотите заменить файлы?", "Ой!", MessageBoxButtons.OKCancel))
+                {
+                    Directory.Delete(path_out, true);
+                }
+                else return;
+            }
+            try
+            {               
+                Directory.CreateDirectory(path_out);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! При создание директории для файлов…", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            path_fn = Path.GetFileName(path_fn) + ".cfg";
+
+            Console.WriteLine(path_fn);
+            try
+            {
+                File.Copy(Path.GetFullPath("data/custom/" + com.Path), path_out + "/" + path_fn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            CWRItem cwi = new CWRItem(path_out + "/" + path_fn);
+            cwi.SetOrAddItem("path", path_fn);
+
+            if (com.Type == Command.EType.COMGP) 
+            {
+                try
+                {
+                    File.Copy(com.Arg, path_out + "/" + Path.GetFileName(com.Arg));
+                    cwi.SetOrAddItem("arg1", path_out + "/" + Path.GetFileName(com.Arg));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            //-----------------
+            MessageBox.Show("Экспорт файлов команд успешно завершён!", "Экспорт", MessageBoxButtons.OK);
+            Process.Start("explorer.exe", path_out);
+        }
+
+        private void экспортToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportCommandFile();
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)
