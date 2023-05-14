@@ -365,3 +365,6 @@ FodyWeavers.xsd
 /сборка/Aison - setup (any CPU).exe
 /сборка/Aison - setup (any CPU).iss
 /сборка/Aison - setup (x86).iss
+/сборка/any CPU/data/config.cfg
+/сборка/any CPU/Aison.exe
+/сборка/для x86/Aison.exe
