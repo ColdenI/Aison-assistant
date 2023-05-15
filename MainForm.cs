@@ -212,6 +212,13 @@ namespace Aison___assistant
 
         public void UI_Update()
         {
+            bool v = listBox_custom_command.SelectedIndex != -1;
+            редактироватьToolStripMenuItem.Enabled = v;
+            удалитьToolStripMenuItem1.Enabled = v;
+            исключитьToolStripMenuItem.Enabled = v;
+            экспортToolStripMenuItem.Enabled = v;
+            активироватьToolStripMenuItem.Enabled = !Aison.isActive;
+
             if (Aison.isActive)isAisonAct_indi.BackColor = Color.LimeGreen;
             else isAisonAct_indi.BackColor = Color.Salmon;
 
@@ -314,6 +321,16 @@ namespace Aison___assistant
             Aison.TCom_aisonRes = new CWRFile("data/CW-AisonRes.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
             Aison.TCom_aisonDeView = new CWRFile("data/CW-AisonDeView.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
             Aison.TCom_playCityGame = new CWRFile("data/CW-CityGame.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
+
+
+            if (!File.Exists("data/isTraining") && DialogResult.OK == MessageBox.Show("Хотите пройти обучение пользование программой?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
+            {
+                File.Create("data/isTraining");
+                TrainingProgram();
+            }
+            else if (!File.Exists("data/isTraining") && DialogResult.No == MessageBox.Show("Хотите видеть это сообщение в последующие запуски программы?", "?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                File.Create("data/isTraining");
+
 
             Loger.print("Loading data... end");
             UI_Update();
@@ -650,7 +667,7 @@ namespace Aison___assistant
 
         private void какРаботаетПрограммаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("media\\infoWork.pdf");
+            TrainingProgram();
         }
 
         private void скрытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -761,7 +778,18 @@ namespace Aison___assistant
                 // предложить переместить
                 if(DialogResult.OK == MessageBox.Show("Файл команд должен быть расположен по пути «..Aison/data/custom/file.cfg»\nХотите переместить файл?", "Ой!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
                 {
-                    File.Move(in_file, "data/custom/" + Path.GetFileName(in_file));
+                    if(new CWRItem(in_file).ContainsItem("type") && new CWRItem(in_file).ContainsItem("arg1"))
+                        if(new CWRItem(in_file).GetItemString("type") == "COMGP")
+                        {
+                            string path_acg = new CWRItem(in_file).GetItemString("arg1");
+                            if (File.Exists(path_acg))
+                            {
+                                File.Copy(path_acg, "data/custom/" + Path.GetFileName(path_acg));
+                                new CWRItem(in_file).SetOrAddItem("arg1", Path.GetFullPath("data/custom/" + Path.GetFileName(path_acg)));
+                            }
+                        }
+                            
+                    File.Copy(in_file, "data/custom/" + Path.GetFileName(in_file));
 
                     in_file = Path.GetFullPath("data/custom/") + Path.GetFileName(in_file);
                 }
@@ -892,6 +920,21 @@ namespace Aison___assistant
         private void экспортToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExportCommandFile();
+        }
+
+        private void toolStripSplitButton1_Click(object sender, EventArgs e)
+        {
+            UI_Update();
+        }
+
+        private void TrainingProgram()
+        {
+            if (!File.Exists("media\\infoWork.pdf"))
+            {
+                MessageBox.Show("Файл с информацией не найден! \n\"media\\\\infoWork.pdf\"", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Process.Start("media\\infoWork.pdf");
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)
