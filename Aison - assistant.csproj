@@ -166,6 +166,12 @@
     <Compile Include="EditCommandsListForm.Designer.cs">
       <DependentUpon>EditCommandsListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ErrorStartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorStartForm.Designer.cs">
+      <DependentUpon>ErrorStartForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FindCommandGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditCommandsListForm.resx">
       <DependentUpon>EditCommandsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorStartForm.resx">
+      <DependentUpon>ErrorStartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FindCommandGroupForm.resx">
       <DependentUpon>FindCommandGroupForm.cs</DependentUpon>

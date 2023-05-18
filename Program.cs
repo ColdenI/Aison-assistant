@@ -20,7 +20,16 @@ namespace Aison___assistant
             if (pr != null)
                 Application.Run(new ProgramAlreadyOpenForm(pr));
             else
-                Application.Run(new MainForm());
+            {
+                try
+                {
+                    Application.Run(new MainForm());
+                }catch (Exception ex) 
+                {
+                    Application.Run(new ErrorStartForm(ex));
+                }
+            }
+                
         }
 
         private static void timer_aison_activ_Tick(object sender, EventArgs e)
