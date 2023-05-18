@@ -618,14 +618,14 @@ namespace Aison___assistant
             this.панельКомандToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.панельКомандToolStripMenuItem.Enabled = false;
             this.панельКомандToolStripMenuItem.Name = "панельКомандToolStripMenuItem";
-            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.панельКомандToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.панельКомандToolStripMenuItem.Text = "Панель команд";
             this.панельКомандToolStripMenuItem.CheckedChanged += new System.EventHandler(this.панельКомандToolStripMenuItem_CheckedChanged);
             // 
             // очиститьИсториюToolStripMenuItem
             // 
             this.очиститьИсториюToolStripMenuItem.Name = "очиститьИсториюToolStripMenuItem";
-            this.очиститьИсториюToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.очиститьИсториюToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
             this.очиститьИсториюToolStripMenuItem.Text = "Очистить историю";
             this.очиститьИсториюToolStripMenuItem.Click += new System.EventHandler(this.очиститьИсториюToolStripMenuItem_Click);
             // 

@@ -212,12 +212,7 @@ namespace Aison___assistant
 
         public void UI_Update()
         {
-            bool v = listBox_custom_command.SelectedIndex != -1;
-            редактироватьToolStripMenuItem.Enabled = v;
-            удалитьToolStripMenuItem1.Enabled = v;
-            исключитьToolStripMenuItem.Enabled = v;
-            экспортToolStripMenuItem.Enabled = v;
-            активироватьToolStripMenuItem.Enabled = !Aison.isActive;
+            UI_Updata_2();
 
             if (Aison.isActive)isAisonAct_indi.BackColor = Color.LimeGreen;
             else isAisonAct_indi.BackColor = Color.Salmon;
@@ -231,6 +226,16 @@ namespace Aison___assistant
                 MessageBox.Show($"Произошла критическая ошибка и файлом дополнительных команд!\nПопробуйте удалить:\n{Path.GetFullPath("data\\custom-c.cfg")}\nИли переустановите программу.");
                 Application.Exit();
             }
+        }
+
+        public void UI_Updata_2()
+        {
+            bool v = listBox_custom_command.SelectedIndex != -1;
+            редактироватьToolStripMenuItem.Enabled = v;
+            удалитьToolStripMenuItem1.Enabled = v;
+            исключитьToolStripMenuItem.Enabled = v;
+            экспортToolStripMenuItem.Enabled = v;
+            активироватьToolStripMenuItem.Enabled = !Aison.isActive;
         }
 
         private void timer_aison_activ_Tick(object sender, EventArgs e)
@@ -768,6 +773,13 @@ namespace Aison___assistant
 
         private void RegistCommand()
         {
+            if (!isPRactive && listBox_custom_command.Items.Count >= 5)
+            {
+                if (MessageBox.Show("Вы не можете добавить больше 5 собственных команд, потому что у вас пробная версия программы.\n \nХотите купить сейчас?", "Ой...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
+                    Open_ByeAisonForm();
+                return;
+            }
+
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = Path.GetFullPath("data/custom");
             if (ofd.ShowDialog() == DialogResult.Cancel) return;
@@ -924,7 +936,7 @@ namespace Aison___assistant
 
         private void toolStripSplitButton1_Click(object sender, EventArgs e)
         {
-            UI_Update();
+            UI_Updata_2();
         }
 
         private void TrainingProgram()
