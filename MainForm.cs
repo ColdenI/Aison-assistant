@@ -29,7 +29,7 @@ namespace Aison___assistant
         public MainForm()
         {
             InitializeComponent();
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            this.KeyDown += new KeyEventHandler(this.MainForm_KeyDown);
             this.KeyPreview = true;
 
 
@@ -109,6 +109,11 @@ namespace Aison___assistant
             sre.LoadGrammar(new Grammar(gb));
             sre.RecognizeAsync(RecognizeMode.Multiple);
 
+            Init_synth();
+        }
+
+        private void Init_synth()
+        {
             // инициализация синтеза речи
             synth = new SpeechSynthesizer();
             var voices = synth.GetInstalledVoices(new CultureInfo(lang_out));
@@ -793,11 +798,15 @@ namespace Aison___assistant
                     if(new CWRItem(in_file).ContainsItem("type") && new CWRItem(in_file).ContainsItem("arg1"))
                         if(new CWRItem(in_file).GetItemString("type") == "COMGP")
                         {
-                            string path_acg = new CWRItem(in_file).GetItemString("arg1");
+                            string path_acg = Path.GetDirectoryName(in_file) + "\\" + new CWRItem(in_file).GetItemString("arg1");
                             if (File.Exists(path_acg))
                             {
                                 File.Copy(path_acg, "data/custom/" + Path.GetFileName(path_acg));
                                 new CWRItem(in_file).SetOrAddItem("arg1", Path.GetFullPath("data/custom/" + Path.GetFileName(path_acg)));
+                            }
+                            else
+                            {
+                                MessageBox.Show("File Aison Command Group not found!");
                             }
                         }
                             
@@ -917,7 +926,7 @@ namespace Aison___assistant
                 try
                 {
                     File.Copy(com.Arg, path_out + "/" + Path.GetFileName(com.Arg));
-                    cwi.SetOrAddItem("arg1", path_out + "/" + Path.GetFileName(com.Arg));
+                    cwi.SetOrAddItem("arg1", Path.GetFileName(com.Arg));
                 }
                 catch (Exception ex)
                 {
@@ -947,6 +956,16 @@ namespace Aison___assistant
                 return;
             }
             Process.Start("media\\infoWork.pdf");
+        }
+
+        private void файлыКомандToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", "data\\custom");
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)

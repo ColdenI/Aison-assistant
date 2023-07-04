@@ -165,12 +165,17 @@ namespace Aison___assistant
 
         private void button3_Click(object sender, EventArgs e)
         {
-            textBox3.Text = GetFilePath();
+            textBox3.Text = GetFilePath(textBox3.Text);
         }
 
-        public static string GetFilePath()
+        public static string GetFilePath(string str)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            if (File.Exists(str))
+            {
+                ofd.InitialDirectory = Path.GetDirectoryName(str);
+                ofd.FileName = str;
+            }
             if (ofd.ShowDialog() == DialogResult.Cancel)
                 return null;
 

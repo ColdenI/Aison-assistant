@@ -36,11 +36,12 @@
             this.button_MSSpeech_TTS_ru = new System.Windows.Forms.Button();
             this.button_SpeechPlatformRuntime_x32 = new System.Windows.Forms.Button();
             this.button_restart = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(15, 227);
+            this.button1.Location = new System.Drawing.Point(15, 243);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(188, 33);
             this.button1.TabIndex = 0;
@@ -99,7 +100,7 @@
             // 
             // button_restart
             // 
-            this.button_restart.Location = new System.Drawing.Point(235, 227);
+            this.button_restart.Location = new System.Drawing.Point(235, 243);
             this.button_restart.Name = "button_restart";
             this.button_restart.Size = new System.Drawing.Size(135, 33);
             this.button_restart.TabIndex = 6;
@@ -107,11 +108,24 @@
             this.button_restart.UseVisualStyleBackColor = true;
             this.button_restart.Click += new System.EventHandler(this.button_restart_Click);
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(15, 213);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(355, 23);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Если кнопка отключена, файл установщика не найден!";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // ErrorStartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 271);
+            this.ClientSize = new System.Drawing.Size(387, 288);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button_restart);
             this.Controls.Add(this.button_SpeechPlatformRuntime_x32);
             this.Controls.Add(this.button_MSSpeech_TTS_ru);
@@ -138,5 +152,6 @@
         private System.Windows.Forms.Button button_MSSpeech_TTS_ru;
         private System.Windows.Forms.Button button_SpeechPlatformRuntime_x32;
         private System.Windows.Forms.Button button_restart;
+        private System.Windows.Forms.Label label2;
     }
 }

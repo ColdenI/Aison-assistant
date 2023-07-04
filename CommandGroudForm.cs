@@ -105,7 +105,7 @@ namespace Aison___assistant
 
         private void button3_Click(object sender, EventArgs e)
         {
-            textBox_command_arg_1.Text = AddEditDefCommandForm.GetFilePath();
+            textBox_command_arg_1.Text = AddEditDefCommandForm.GetFilePath(textBox_command_arg_1.Text);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
