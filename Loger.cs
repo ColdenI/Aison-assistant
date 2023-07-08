@@ -1,5 +1,6 @@
 ﻿using CWR;
 using System;
+using System.IO;
 
 namespace Aison___assistant
 {
@@ -12,8 +13,9 @@ namespace Aison___assistant
         {
             if (isLog)
             {
+                if(!Directory.Exists(Path)) Directory.CreateDirectory(Path);
                 string fileName = DateTime.Now.Date.ToString().Split(new string[] { " " }, StringSplitOptions.None)[0] + "-log.txt";
-                if (!System.IO.File.Exists(Path + fileName)) new CWRFile(Path + fileName).Write("");
+                if (!File.Exists(Path + fileName)) new CWRFile(Path + fileName).Write("");
 
                 new CWRFile(Path + fileName).Append(DateTime.Now.ToString() + " -> " + str + "\n");
             }

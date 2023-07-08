@@ -76,6 +76,7 @@ namespace Aison___assistant
             this.debagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.писатьLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.посмотретьLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.автозапускToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьВСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.исключитьИзСпискаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -486,7 +487,8 @@ namespace Aison___assistant
             // 
             this.debagToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.писатьLogToolStripMenuItem,
-            this.посмотретьLogToolStripMenuItem});
+            this.посмотретьLogToolStripMenuItem,
+            this.удалитьLogToolStripMenuItem});
             this.debagToolStripMenuItem.Name = "debagToolStripMenuItem";
             this.debagToolStripMenuItem.Size = new System.Drawing.Size(336, 26);
             this.debagToolStripMenuItem.Text = "Отладка";
@@ -507,6 +509,13 @@ namespace Aison___assistant
             this.посмотретьLogToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.посмотретьLogToolStripMenuItem.Text = "Посмотреть log";
             this.посмотретьLogToolStripMenuItem.Click += new System.EventHandler(this.посмотретьLogToolStripMenuItem_Click);
+            // 
+            // удалитьLogToolStripMenuItem
+            // 
+            this.удалитьLogToolStripMenuItem.Name = "удалитьLogToolStripMenuItem";
+            this.удалитьLogToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.удалитьLogToolStripMenuItem.Text = "Удалить log";
+            this.удалитьLogToolStripMenuItem.Click += new System.EventHandler(this.удалитьLogToolStripMenuItem_Click);
             // 
             // автозапускToolStripMenuItem
             // 
@@ -921,6 +930,7 @@ namespace Aison___assistant
         private System.Windows.Forms.ToolStripMenuItem экспортToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem файлыКомандToolStripMenuItem;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.ToolStripMenuItem удалитьLogToolStripMenuItem;
     }
 }
 

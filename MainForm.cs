@@ -21,6 +21,8 @@ namespace Aison___assistant
         public static Aison Aison = new Aison();
         private int AisonVoiseVolume = 100;
         private float sensitivity = 0.7f;
+        private bool _isWelcomeSay = false;
+        private int _speedSay_synth = 0;
 
         static private SpeechRecognitionEngine sre;
         private SpeechSynthesizer synth;
@@ -84,6 +86,7 @@ namespace Aison___assistant
             }
             catch (Exception ex)
             {
+                PlayErrorSound();
                 MessageBox.Show("Старт невозможен!\n\nПричина: " + ex.ToString());
                 Loger.print(ex.ToString());
                 return;
@@ -95,6 +98,7 @@ namespace Aison___assistant
             }
             catch (ArgumentException)
             {
+                PlayErrorSound();
                 MessageBox.Show("Старт невозможен!\nПричина: ArgumentNullException\nВ фале(ах) команд (data\\CW_...txt). Дополните команды!");
                 Loger.print("ArgumentNullException");
                 return;
@@ -205,12 +209,31 @@ namespace Aison___assistant
             }
         }
 
+        private void PlayErrorSound()
+        {
+            if (File.Exists("media/error.wav"))
+            {
+                using (var soundPlayer = new SoundPlayer("media\\error.wav"))
+                {
+                    soundPlayer.Play();
+                }
+            }
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // synth.Speak("Здраствуйте. Вас приветствует программа Эйсон!");
             Aison.Say_sound = synth;
             Aison.timer_activAison = timer_aison_activ;
             Aison.Obj_MainForm = this;
+            Aison.Say_sound.Rate = _speedSay_synth;
+
+            if (_isWelcomeSay)
+            {
+                int _w = Aison.Say_sound.Rate;
+                Aison.Say_sound.Rate = 2;
+                Aison.Say("Здравствуйте, вас приветствует Эйсон! Я ваш голосовой ассистент.");
+                Aison.Say_sound.Rate = _w;
+            }
 
             Aison.Active();
         }
@@ -228,6 +251,7 @@ namespace Aison___assistant
                 foreach (Command i in Aison.commands) listBox_custom_command.Items.Add(i.Path);
             }catch (Exception e)
             {
+                PlayErrorSound();
                 MessageBox.Show($"Произошла критическая ошибка и файлом дополнительных команд!\nПопробуйте удалить:\n{Path.GetFullPath("data\\custom-c.cfg")}\nИли переустановите программу.");
                 Application.Exit();
             }
@@ -254,17 +278,19 @@ namespace Aison___assistant
             Loger.print("Loading data...");
 
             var cfg_file = new CWRItem("data/config.cfg");
-            if (!cfg_file.ContainsItem("lang_in")) cfg_file.AddItem("lang_in", "ru-ru");
-            if (!cfg_file.ContainsItem("lang_out")) cfg_file.AddItem("lang_out", "ru-RU");
-            if (!cfg_file.ContainsItem("act_time")) cfg_file.AddItem("act_time", 7000);
-            if (!cfg_file.ContainsItem("view_hist_pan")) cfg_file.AddItem("view_hist_pan", true);
-            if (!cfg_file.ContainsItem("size_win-h")) cfg_file.AddItem("size_win-h", 475);
-            if (!cfg_file.ContainsItem("size_win-w")) cfg_file.AddItem("size_win-w", 500);
-            if (!cfg_file.ContainsItem("write_log")) cfg_file.AddItem("write_log", true);
-            if (!cfg_file.ContainsItem("aison_volume")) cfg_file.AddItem("aison_volume", 100);
-            if (!cfg_file.ContainsItem("PRc_user")) cfg_file.AddItem("PRc_user", "");
-            if (!cfg_file.ContainsItem("del_view_time")) cfg_file.AddItem("del_view_time", 60000);
-            if (!cfg_file.ContainsItem("sensitivity")) cfg_file.AddItem("sensitivity", 0.7);
+            if (!cfg_file.ContainsItem("lang_in")) cfg_file.AddItem("lang_in", "ru-ru");                // язык распознания
+            if (!cfg_file.ContainsItem("lang_out")) cfg_file.AddItem("lang_out", "ru-RU");              // язык синтеза 
+            if (!cfg_file.ContainsItem("act_time")) cfg_file.AddItem("act_time", 7000);                 // время активности
+            if (!cfg_file.ContainsItem("view_hist_pan")) cfg_file.AddItem("view_hist_pan", true);       // отображать панель истории (неработ.)
+            if (!cfg_file.ContainsItem("size_win-h")) cfg_file.AddItem("size_win-h", 475);              // размер окна
+            if (!cfg_file.ContainsItem("size_win-w")) cfg_file.AddItem("size_win-w", 500);              // размер окна
+            if (!cfg_file.ContainsItem("write_log")) cfg_file.AddItem("write_log", true);               // писать логи?
+            if (!cfg_file.ContainsItem("aison_volume")) cfg_file.AddItem("aison_volume", 100);          // громкость синтеза речи
+            if (!cfg_file.ContainsItem("PRc_user")) cfg_file.AddItem("PRc_user", "");                   // активный код пользователя
+            if (!cfg_file.ContainsItem("del_view_time")) cfg_file.AddItem("del_view_time", 60000);      // задержка на скрытие окна
+            if (!cfg_file.ContainsItem("sensitivity")) cfg_file.AddItem("sensitivity", 0.7);            // чувствительность распознания
+            if (!cfg_file.ContainsItem("is_welcome_say")) cfg_file.AddItem("is_welcome_say", false);    // приветвтвие пользователя при старте
+            if (!cfg_file.ContainsItem("speed_say")) cfg_file.AddItem("speed_say", 0);                  // скорость синтеза речи
 
             lang_In = cfg_file.GetItemString("lang_in");
             lang_out = cfg_file.GetItemString("lang_out");
@@ -280,6 +306,15 @@ namespace Aison___assistant
             //windowsToolStripMenuItem.Enabled = isPRactive;
             timer1.Interval = cfg_file.GetItemInt("del_view_time");
             sensitivity = cfg_file.GetItemFloat("sensitivity");
+            _isWelcomeSay = cfg_file.GetItemBoolean("is_welcome_say");
+            _speedSay_synth = cfg_file.GetItemInt("speed_say");
+            if(_speedSay_synth > 10 || _speedSay_synth < -10)
+            {
+                PlayErrorSound();
+                MessageBox.Show("Ошибка в файле конфигураций! Скорость синтеза речи должен быть в пределах (от -10 до 10) (int) параметр: “speed_say” файл: “data/config.cfg”\nПараметр установлен по умолчанию. (0)", "Ой!", MessageBoxButtons.OK);
+                cfg_file.SetOrAddItem("speed_say", 0);
+                _speedSay_synth = 0;
+            }
 
 
 
@@ -301,6 +336,7 @@ namespace Aison___assistant
                     var newC = new Command(i);
                     if(newC == null)
                     {
+                        PlayErrorSound();
                         MessageBox.Show("File error or not found: " + i);
                     }
                     else
@@ -353,10 +389,7 @@ namespace Aison___assistant
             {
                 if (!File.Exists(i))
                 {
-                    using (var soundPlayer = new SoundPlayer("media\\error.wav"))
-                    {
-                        soundPlayer.Play();
-                    }
+                    PlayErrorSound();
                     MessageBox.Show("Отсутствует файл с командами!\n" + i + "\nПрогрмма создаст файл, но вам нужно его заполнить.", "Ой...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     _e = false;
                     new CWRFile(i).Write(i);
@@ -371,7 +404,8 @@ namespace Aison___assistant
             if(!isPRactive)
                 if(listBox_custom_command.Items.Count >= 5)
                 {
-                    if(MessageBox.Show("Вы не можете добавить больше 5 собственных команд, потому что у вас пробная версия программы.\n \nХотите купить сейчас?", "Ой...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
+                    PlayErrorSound();
+                    if (MessageBox.Show("Вы не можете добавить больше 5 собственных команд, потому что у вас пробная версия программы.\n \nХотите купить сейчас?", "Ой...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
                         Open_ByeAisonForm();
                     return;
                 }
@@ -454,6 +488,7 @@ namespace Aison___assistant
             {
                 if (editCommandsForm.listBox_CommandsList.Items.Count <= 1)
                 {
+                    PlayErrorSound();
                     MessageBox.Show("Добавьте минимум 2 команды.", "Ой...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -579,7 +614,6 @@ namespace Aison___assistant
         public void DeIncludeInAutoStart()
         {
             if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Startup).Replace("\\", "/") + "/Aison-autostart.bat")) File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Startup).Replace("\\", "/") + "/Aison-autostart.bat");
-
         }
 
         private void добавитьВСписокToolStripMenuItem_Click(object sender, EventArgs e)
@@ -606,6 +640,9 @@ namespace Aison___assistant
 
         private void подготовитьКУдалениюToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Вы уверены что хотите выполнить подготовку к удалению программы Aison assistant?\nБудут удалены все пользовательские команды и файлы log.", "?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
             DeIncludeInAutoStart();
             try 
             {
@@ -687,6 +724,7 @@ namespace Aison___assistant
 
         private void очиститьМестоНаДискеToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool isError = false;
             if (MessageBox.Show("Продолжить процедуру по очистке диска:\n\t-Из папки программы будут удалены установочные файлы (MSSpeech_SR_ru-RU_TELE.msi, SpeechPlatformRuntime_x32.msi, x86_MicrosoftSpeechPlatformSDK.msi, MSSpeech_TTS_ru-RU_Elena.msi)\n\t-Будут удалены файлы log\n \nПродолжить?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
             if (Directory.Exists("data/logs"))
@@ -694,12 +732,20 @@ namespace Aison___assistant
                 {
                     File.Delete(file);
                 }
+            else isError = true;
 
             if (File.Exists("MSSpeech_SR_ru-RU_TELE.msi")) File.Delete("MSSpeech_SR_ru-RU_TELE.msi");
             if (File.Exists("SpeechPlatformRuntime_x32.msi")) File.Delete("SpeechPlatformRuntime_x32.msi");
             if (File.Exists("x86_MicrosoftSpeechPlatformSDK.msi")) File.Delete("x86_MicrosoftSpeechPlatformSDK.msi");
             if (File.Exists("MSSpeech_TTS_ru-RU_Elena.msi")) File.Delete("MSSpeech_TTS_ru-RU_Elena.msi");
 
+            if (isError)
+            {
+                PlayErrorSound();
+                MessageBox.Show("Во время выполнения процедуры по очистке диска произошла ошибка.\nДиректория с файлами log не обнаружена!", "Ой...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Directory.CreateDirectory("data/logs");
+            }
+            else MessageBox.Show("Очистка диска прошла успешно.", "Успешно");
         }
 
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -780,6 +826,7 @@ namespace Aison___assistant
         {
             if (!isPRactive && listBox_custom_command.Items.Count >= 5)
             {
+                PlayErrorSound();
                 if (MessageBox.Show("Вы не можете добавить больше 5 собственных команд, потому что у вас пробная версия программы.\n \nХотите купить сейчас?", "Ой...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
                     Open_ByeAisonForm();
                 return;
@@ -824,16 +871,19 @@ namespace Aison___assistant
             }
             catch
             {
+                PlayErrorSound();
                 MessageBox.Show("Файл не является файлом команд или повреждён!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if(!cwi.ContainsItem("path") || !cwi.ContainsItem("coms") || !cwi.ContainsItem("type") || !cwi.ContainsItem("arg1"))
             {
+                PlayErrorSound();
                 MessageBox.Show("Файл не является файлом команд или повреждён!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (cwi.GetItemString("path") != Path.GetFileName(in_file))
             {
+                PlayErrorSound();
                 MessageBox.Show("Файл не является файлом команд или повреждён!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -843,6 +893,7 @@ namespace Aison___assistant
             for(int i =0;i<listBox_custom_command.Items.Count;i++) arr[i] = listBox_custom_command.Items[i].ToString();
             if (ContainsItemInArray<string>(arr, Path.GetFileName(in_file).ToString()))
             {
+                PlayErrorSound();
                 MessageBox.Show("Такой файл уже зарегистрирован!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -850,6 +901,7 @@ namespace Aison___assistant
             var newC = new Command(Path.GetFileName(in_file));
             if (newC == null)
             {
+                PlayErrorSound();
                 MessageBox.Show("File error or not found: " + Path.GetFileName(in_file));
                 return;
             }
@@ -882,6 +934,7 @@ namespace Aison___assistant
             */
             if (!File.Exists("data/custom/" + com.Path))
             {
+                PlayErrorSound();
                 MessageBox.Show("Файл команд не найден!", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -890,6 +943,7 @@ namespace Aison___assistant
             path_out = Path.GetDirectoryName(path_out + "/" + Path.GetFileName(path_out)) + " - exporting Aison command file";
             if (Directory.Exists(path_out)) 
             {
+                PlayErrorSound();
                 if (DialogResult.OK == MessageBox.Show("Файл с таким названием уже экспортирован! Хотите заменить файлы?", "Ой!", MessageBoxButtons.OKCancel))
                 {
                     Directory.Delete(path_out, true);
@@ -902,19 +956,21 @@ namespace Aison___assistant
             }
             catch
             {
+                PlayErrorSound();
                 MessageBox.Show("Ошибка! При создание директории для файлов…", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             path_fn = Path.GetFileName(path_fn) + ".cfg";
 
-            Console.WriteLine(path_fn);
+            // Console.WriteLine(path_fn);
             try
             {
                 File.Copy(Path.GetFullPath("data/custom/" + com.Path), path_out + "/" + path_fn);
             }
             catch (Exception ex)
             {
+                PlayErrorSound();
                 MessageBox.Show(ex.Message);
             }
 
@@ -930,6 +986,7 @@ namespace Aison___assistant
                 }
                 catch (Exception ex)
                 {
+                    PlayErrorSound();
                     MessageBox.Show(ex.Message);
                 }
             }
@@ -952,6 +1009,7 @@ namespace Aison___assistant
         {
             if (!File.Exists("media\\infoWork.pdf"))
             {
+                PlayErrorSound();
                 MessageBox.Show("Файл с информацией не найден! \n\"media\\\\infoWork.pdf\"", "Ой!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -966,6 +1024,24 @@ namespace Aison___assistant
         private void timer2_Tick(object sender, EventArgs e)
         {
 
+        }
+
+        private void удалитьLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists("data/logs"))
+            {
+                foreach (string file in Directory.EnumerateFiles("data/logs/", "*.*", SearchOption.AllDirectories))
+                {
+                    File.Delete(file);
+                }
+                MessageBox.Show("Файлы log успешно удалены.", "Успешно", MessageBoxButtons.OK);
+            }
+            else
+            {
+                PlayErrorSound();
+                MessageBox.Show("Директория с файлами log не обнаружена!", "Ой...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Directory.CreateDirectory("data/logs");
+            }
         }
 
         static private bool ContainsItemInArray<T>(T[] arr, T i)
