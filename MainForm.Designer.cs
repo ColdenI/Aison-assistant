@@ -108,7 +108,6 @@ namespace Aison___assistant
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -132,7 +131,7 @@ namespace Aison___assistant
             this.button_actAison.Location = new System.Drawing.Point(0, 416);
             this.button_actAison.Margin = new System.Windows.Forms.Padding(4);
             this.button_actAison.Name = "button_actAison";
-            this.button_actAison.Size = new System.Drawing.Size(372, 64);
+            this.button_actAison.Size = new System.Drawing.Size(366, 64);
             this.button_actAison.TabIndex = 0;
             this.button_actAison.Text = "Позвать";
             this.button_actAison.UseVisualStyleBackColor = true;
@@ -691,7 +690,7 @@ namespace Aison___assistant
             this.textBox_log_message.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_log_message.Name = "textBox_log_message";
             this.textBox_log_message.ReadOnly = true;
-            this.textBox_log_message.Size = new System.Drawing.Size(188, 464);
+            this.textBox_log_message.Size = new System.Drawing.Size(194, 464);
             this.textBox_log_message.TabIndex = 3;
             this.textBox_log_message.Text = "";
             // 
@@ -704,7 +703,7 @@ namespace Aison___assistant
             this.listBox_custom_command.Location = new System.Drawing.Point(4, 51);
             this.listBox_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.listBox_custom_command.Name = "listBox_custom_command";
-            this.listBox_custom_command.Size = new System.Drawing.Size(364, 296);
+            this.listBox_custom_command.Size = new System.Drawing.Size(358, 296);
             this.listBox_custom_command.TabIndex = 4;
             // 
             // button_add_new_custom_command
@@ -715,7 +714,7 @@ namespace Aison___assistant
             this.button_add_new_custom_command.Location = new System.Drawing.Point(4, 19);
             this.button_add_new_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.button_add_new_custom_command.Name = "button_add_new_custom_command";
-            this.button_add_new_custom_command.Size = new System.Drawing.Size(364, 32);
+            this.button_add_new_custom_command.Size = new System.Drawing.Size(358, 32);
             this.button_add_new_custom_command.TabIndex = 5;
             this.button_add_new_custom_command.Text = "Добавить команду";
             this.toolTip1.SetToolTip(this.button_add_new_custom_command, "Добавить новую команду в список");
@@ -730,7 +729,7 @@ namespace Aison___assistant
             this.button_edit_custom_command.Location = new System.Drawing.Point(0, 0);
             this.button_edit_custom_command.Margin = new System.Windows.Forms.Padding(4);
             this.button_edit_custom_command.Name = "button_edit_custom_command";
-            this.button_edit_custom_command.Size = new System.Drawing.Size(364, 32);
+            this.button_edit_custom_command.Size = new System.Drawing.Size(358, 32);
             this.button_edit_custom_command.TabIndex = 6;
             this.button_edit_custom_command.Text = "Редактировать";
             this.toolTip1.SetToolTip(this.button_edit_custom_command, "Редактировать выделенный элемент списка");
@@ -745,7 +744,7 @@ namespace Aison___assistant
             this.button_remove_command.Location = new System.Drawing.Point(0, 32);
             this.button_remove_command.Margin = new System.Windows.Forms.Padding(4);
             this.button_remove_command.Name = "button_remove_command";
-            this.button_remove_command.Size = new System.Drawing.Size(364, 32);
+            this.button_remove_command.Size = new System.Drawing.Size(358, 32);
             this.button_remove_command.TabIndex = 7;
             this.button_remove_command.Text = "Удалить";
             this.toolTip1.SetToolTip(this.button_remove_command, "Удалить выделенный элемент списка");
@@ -762,7 +761,7 @@ namespace Aison___assistant
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(372, 416);
+            this.groupBox1.Size = new System.Drawing.Size(366, 416);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ваши команды";
@@ -775,7 +774,7 @@ namespace Aison___assistant
             this.panel1.Location = new System.Drawing.Point(4, 347);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(364, 65);
+            this.panel1.Size = new System.Drawing.Size(358, 65);
             this.panel1.TabIndex = 10;
             // 
             // splitContainer1
@@ -796,7 +795,7 @@ namespace Aison___assistant
             this.splitContainer1.Panel2.Controls.Add(this.textBox_log_message);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Size = new System.Drawing.Size(565, 480);
-            this.splitContainer1.SplitterDistance = 372;
+            this.splitContainer1.SplitterDistance = 366;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 9;
             // 
@@ -815,12 +814,6 @@ namespace Aison___assistant
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timer2
-            // 
-            this.timer2.Enabled = true;
-            this.timer2.Interval = 1000;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // MainForm
             // 
@@ -929,7 +922,6 @@ namespace Aison___assistant
         private System.Windows.Forms.ToolStripMenuItem импортToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem экспортToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem файлыКомандToolStripMenuItem;
-        private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.ToolStripMenuItem удалитьLogToolStripMenuItem;
     }
 }

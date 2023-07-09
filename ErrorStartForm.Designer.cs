@@ -37,11 +37,12 @@
             this.button_SpeechPlatformRuntime_x32 = new System.Windows.Forms.Button();
             this.button_restart = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(15, 243);
+            this.button1.Location = new System.Drawing.Point(15, 263);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(188, 33);
             this.button1.TabIndex = 0;
@@ -51,16 +52,17 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(358, 64);
             this.label1.TabIndex = 1;
             this.label1.Text = "При запуске программы произошла ошибка. Возможно у вас не установлены дополнитель" +
     "ные компоненты. Попробуйте установить следующее ПО. ";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button_x86_MicrosoftSpeechPlatformSDK
             // 
-            this.button_x86_MicrosoftSpeechPlatformSDK.Location = new System.Drawing.Point(15, 76);
+            this.button_x86_MicrosoftSpeechPlatformSDK.Location = new System.Drawing.Point(59, 76);
             this.button_x86_MicrosoftSpeechPlatformSDK.Name = "button_x86_MicrosoftSpeechPlatformSDK";
             this.button_x86_MicrosoftSpeechPlatformSDK.Size = new System.Drawing.Size(260, 28);
             this.button_x86_MicrosoftSpeechPlatformSDK.TabIndex = 2;
@@ -70,7 +72,7 @@
             // 
             // button_MSSpeech_SR_ru
             // 
-            this.button_MSSpeech_SR_ru.Location = new System.Drawing.Point(15, 178);
+            this.button_MSSpeech_SR_ru.Location = new System.Drawing.Point(59, 178);
             this.button_MSSpeech_SR_ru.Name = "button_MSSpeech_SR_ru";
             this.button_MSSpeech_SR_ru.Size = new System.Drawing.Size(260, 28);
             this.button_MSSpeech_SR_ru.TabIndex = 3;
@@ -80,7 +82,7 @@
             // 
             // button_MSSpeech_TTS_ru
             // 
-            this.button_MSSpeech_TTS_ru.Location = new System.Drawing.Point(15, 144);
+            this.button_MSSpeech_TTS_ru.Location = new System.Drawing.Point(59, 144);
             this.button_MSSpeech_TTS_ru.Name = "button_MSSpeech_TTS_ru";
             this.button_MSSpeech_TTS_ru.Size = new System.Drawing.Size(260, 28);
             this.button_MSSpeech_TTS_ru.TabIndex = 4;
@@ -90,7 +92,7 @@
             // 
             // button_SpeechPlatformRuntime_x32
             // 
-            this.button_SpeechPlatformRuntime_x32.Location = new System.Drawing.Point(15, 110);
+            this.button_SpeechPlatformRuntime_x32.Location = new System.Drawing.Point(59, 110);
             this.button_SpeechPlatformRuntime_x32.Name = "button_SpeechPlatformRuntime_x32";
             this.button_SpeechPlatformRuntime_x32.Size = new System.Drawing.Size(260, 28);
             this.button_SpeechPlatformRuntime_x32.TabIndex = 5;
@@ -100,7 +102,7 @@
             // 
             // button_restart
             // 
-            this.button_restart.Location = new System.Drawing.Point(235, 243);
+            this.button_restart.Location = new System.Drawing.Point(235, 263);
             this.button_restart.Name = "button_restart";
             this.button_restart.Size = new System.Drawing.Size(135, 33);
             this.button_restart.TabIndex = 6;
@@ -120,11 +122,23 @@
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(106, 236);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(169, 16);
+            this.linkLabel1.TabIndex = 8;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Скачать с сайта Microsoft";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // ErrorStartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 288);
+            this.ClientSize = new System.Drawing.Size(387, 308);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button_restart);
             this.Controls.Add(this.button_SpeechPlatformRuntime_x32);
@@ -140,6 +154,7 @@
             this.Text = "Aison - Ошибка запуска!";
             this.Load += new System.EventHandler(this.ErrorStartForm_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -153,5 +168,6 @@
         private System.Windows.Forms.Button button_SpeechPlatformRuntime_x32;
         private System.Windows.Forms.Button button_restart;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

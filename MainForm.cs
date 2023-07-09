@@ -120,10 +120,14 @@ namespace Aison___assistant
         {
             // инициализация синтеза речи
             synth = new SpeechSynthesizer();
+            synth.SpeakCompleted += Aison.Synth_SpeakCompleted;
             var voices = synth.GetInstalledVoices(new CultureInfo(lang_out));
             synth.SetOutputToDefaultAudioDevice();
             synth.SelectVoice(voices[0].VoiceInfo.Name);
-
+            /*
+            for (int i = 0; i < voices.Count; i++)
+                Console.WriteLine(voices[i].VoiceInfo.Name);
+            */
             synth.Volume = AisonVoiseVolume;
         }
 
@@ -152,25 +156,35 @@ namespace Aison___assistant
 
         }
 
+        private void PrintAndLogUserCommand(string str)
+        {
+            Console.WriteLine(str);
+            Loger.print("Command: " + str);
+            textBox_log_message.Text = str + "\n" + textBox_log_message.Text;
+        }
+
+
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             if (e.Result.Confidence > sensitivity && Aison.isWork) 
             {
-                Console.WriteLine(e.Result.Text);
-                Loger.print("Command: " + e.Result.Text);
-                textBox_log_message.Text = e.Result.Text + "\n" + textBox_log_message.Text;
-
                 // активировать
                 if (ContainsItemInArray<string>(Aison.Active_Words, e.Result.Text))
                 {
+                    PrintAndLogUserCommand(e.Result.Text);
+                    Aison.Say_sound.SpeakAsyncCancelAll();
                     Aison.Active();
                     timer_aison_activ.Stop();
                     timer_aison_activ.Start();
                     UI_Update();
+                    return;
                 }
 
                 if (Aison.isActive)
                 {
+                    Aison.Say_sound.SpeakAsyncCancelAll();
+                    PrintAndLogUserCommand(e.Result.Text);
+
                     if (ContainsItemInArray<string>(Aison.TCom_Time, e.Result.Text)) Aison.Com_Time(); // сказаьть время
                     if (ContainsItemInArray<string>(Aison.TCom_Data, e.Result.Text)) Aison.Com_Data(); // сказать дату
                     if (ContainsItemInArray<string>(Aison.TCom_replayLast, e.Result.Text)) Aison.Com_replayLastMessage(); // повторить последнюю фразу
@@ -278,20 +292,20 @@ namespace Aison___assistant
             Loger.print("Loading data...");
 
             var cfg_file = new CWRItem("data/config.cfg");
-            if (!cfg_file.ContainsItem("lang_in")) cfg_file.AddItem("lang_in", "ru-ru");                // язык распознания
-            if (!cfg_file.ContainsItem("lang_out")) cfg_file.AddItem("lang_out", "ru-RU");              // язык синтеза 
-            if (!cfg_file.ContainsItem("act_time")) cfg_file.AddItem("act_time", 7000);                 // время активности
-            if (!cfg_file.ContainsItem("view_hist_pan")) cfg_file.AddItem("view_hist_pan", true);       // отображать панель истории (неработ.)
-            if (!cfg_file.ContainsItem("size_win-h")) cfg_file.AddItem("size_win-h", 475);              // размер окна
-            if (!cfg_file.ContainsItem("size_win-w")) cfg_file.AddItem("size_win-w", 500);              // размер окна
-            if (!cfg_file.ContainsItem("write_log")) cfg_file.AddItem("write_log", true);               // писать логи?
-            if (!cfg_file.ContainsItem("aison_volume")) cfg_file.AddItem("aison_volume", 100);          // громкость синтеза речи
-            if (!cfg_file.ContainsItem("PRc_user")) cfg_file.AddItem("PRc_user", "");                   // активный код пользователя
-            if (!cfg_file.ContainsItem("del_view_time")) cfg_file.AddItem("del_view_time", 60000);      // задержка на скрытие окна
-            if (!cfg_file.ContainsItem("sensitivity")) cfg_file.AddItem("sensitivity", 0.7);            // чувствительность распознания
-            if (!cfg_file.ContainsItem("is_welcome_say")) cfg_file.AddItem("is_welcome_say", false);    // приветвтвие пользователя при старте
-            if (!cfg_file.ContainsItem("speed_say")) cfg_file.AddItem("speed_say", 0);                  // скорость синтеза речи
-
+            if (!cfg_file.ContainsItem("lang_in")) cfg_file.AddItem("lang_in", "ru-ru");                                                // язык распознания
+            if (!cfg_file.ContainsItem("lang_out")) cfg_file.AddItem("lang_out", "ru-RU");                                              // язык синтеза 
+            if (!cfg_file.ContainsItem("act_time")) cfg_file.AddItem("act_time", 7000);                                                 // время активности
+            if (!cfg_file.ContainsItem("view_hist_pan")) cfg_file.AddItem("view_hist_pan", true);                                       // отображать панель истории (неработ.)
+            if (!cfg_file.ContainsItem("size_win-h")) cfg_file.AddItem("size_win-h", 475);                                              // размер окна
+            if (!cfg_file.ContainsItem("size_win-w")) cfg_file.AddItem("size_win-w", 500);                                              // размер окна
+            if (!cfg_file.ContainsItem("write_log")) cfg_file.AddItem("write_log", true);                                               // писать логи?
+            if (!cfg_file.ContainsItem("aison_volume")) cfg_file.AddItem("aison_volume", 100);                                          // громкость синтеза речи
+            if (!cfg_file.ContainsItem("PRc_user")) cfg_file.AddItem("PRc_user", "");                                                   // активный код пользователя
+            if (!cfg_file.ContainsItem("del_view_time")) cfg_file.AddItem("del_view_time", 60000);                                      // задержка на скрытие окна
+            if (!cfg_file.ContainsItem("sensitivity")) cfg_file.AddItem("sensitivity", 0.7);                                            // чувствительность распознания
+            if (!cfg_file.ContainsItem("is_welcome_say")) cfg_file.AddItem("is_welcome_say", false);                                    // приветвтвие пользователя при старте
+            if (!cfg_file.ContainsItem("speed_say")) cfg_file.AddItem("speed_say", 0);                                                  // скорость синтеза речи
+            
             lang_In = cfg_file.GetItemString("lang_in");
             lang_out = cfg_file.GetItemString("lang_out");
             timer_aison_activ.Interval = cfg_file.GetItemInt("act_time");
@@ -315,6 +329,7 @@ namespace Aison___assistant
                 cfg_file.SetOrAddItem("speed_say", 0);
                 _speedSay_synth = 0;
             }
+            
 
 
 
@@ -1050,6 +1065,7 @@ namespace Aison___assistant
                 if (_i.Equals(i)) return true;
             return false;
         }
+
     }
 
 

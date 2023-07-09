@@ -3,4 +3,4 @@
 	* SpeechPlatformRuntime_x32.msi
 	* x86_MicrosoftSpeechPlatformSDK.msi
 	* MSSpeech_TTS_ru-RU_Elena.msi
-Эти файлы расположены в папке программы Aison. Или вы можете установить их с официального сайта Microsoft. 
+Эти файлы расположены в папке программы Aison. Или вы можете установить их с официального сайта Microsoft. (https://www.microsoft.com/en-us/download/details.aspx?id=27224) 

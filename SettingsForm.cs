@@ -13,6 +13,10 @@ namespace Aison___assistant
 {
     public partial class SettingsForm : Form
     {
+
+        private bool isEdit = false;
+
+
         public SettingsForm()
         {
             InitializeComponent();
@@ -33,54 +37,65 @@ namespace Aison___assistant
 
             trackBar_sensitivity.Value = (int)(cfg_file.GetItemFloat("sensitivity") * 100);
             label_sensitivity.Text = (cfg_file.GetItemFloat("sensitivity") * 100).ToString();
-        }
 
-        private void button_volue_Click(object sender, EventArgs e)
-        {
-            var cfg_file = new CWRItem("data/config.cfg");
-            cfg_file.SetOrAddItem("aison_volume", trackBar_volue.Value);
-            if (MessageBox.Show("Изменения вступят в силу только после перезапуска программы.\nХотите перезапустить её сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
+            trackBar_speed_say.Value = cfg_file.GetItemInt("speed_say");
+            label_speed_say.Text = cfg_file.GetItemInt("speed_say").ToString();
+
+            checkBox_isWelcomeSay.Checked = cfg_file.GetItemBoolean("is_welcome_say");
+
+
+
+            isEdit = false;
         }
 
         private void trackBar_volue_Scroll(object sender, EventArgs e)
         {
             label_volue.Text = trackBar_volue.Value.ToString() + " %";
+            isEdit = true;
         }
 
         private void trackBar_timeAct_Scroll(object sender, EventArgs e)
         {
             label_timeAct.Text = trackBar_timeAct.Value.ToString();
-        }
-
-        private void button_timeAct_Click(object sender, EventArgs e)
-        {
-            var cfg_file = new CWRItem("data/config.cfg");
-            cfg_file.SetOrAddItem("act_time", trackBar_timeAct.Value * 1000);
-            if (MessageBox.Show("Изменения вступят в силу только после перезапуска программы.\nХотите перезапустить её сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
-        }
-
-        private void button_delayOffView_Click(object sender, EventArgs e)
-        {
-            var cfg_file = new CWRItem("data/config.cfg");
-            cfg_file.SetOrAddItem("del_view_time", trackBar_delayOffView.Value * 1000);
-            if (MessageBox.Show("Изменения вступят в силу только после перезапуска программы.\nХотите перезапустить её сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
+            isEdit = true;
         }
 
         private void trackBar_delayOffView_Scroll(object sender, EventArgs e)
         {
             label_delayOffView.Text = trackBar_delayOffView.Value.ToString();
+            isEdit = true;
         }
 
         private void trackBar_sensitivity_Scroll(object sender, EventArgs e)
         {
             label_sensitivity.Text = trackBar_sensitivity.Value.ToString();
+            isEdit = true;
         }
 
-        private void button_sensitivity_Click(object sender, EventArgs e)
+        private void trackBar_speed_say_Scroll(object sender, EventArgs e)
         {
+            label_speed_say.Text = trackBar_speed_say.Value.ToString();
+            isEdit = true;
+        }
+
+        private void SettingsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!isEdit) return;
             var cfg_file = new CWRItem("data/config.cfg");
+
             cfg_file.SetOrAddItem("sensitivity", trackBar_sensitivity.Value / 100f);
+            cfg_file.SetOrAddItem("del_view_time", trackBar_delayOffView.Value * 1000);
+            cfg_file.SetOrAddItem("act_time", trackBar_timeAct.Value * 1000);
+            cfg_file.SetOrAddItem("aison_volume", trackBar_volue.Value);
+            cfg_file.SetOrAddItem("speed_say", trackBar_speed_say.Value);
+            cfg_file.SetOrAddItem("is_welcome_say", checkBox_isWelcomeSay.Checked);
+
             if (MessageBox.Show("Изменения вступят в силу только после перезапуска программы.\nХотите перезапустить её сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
+        }
+
+        private void checkBox_isWelcomeSay_CheckedChanged(object sender, EventArgs e)
+        {
+            isEdit = true;
         }
     }
 }

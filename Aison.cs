@@ -18,6 +18,8 @@ namespace Aison___assistant
         public List<Command> commands;
         public MainForm Obj_MainForm;
 
+        private bool _isActAison_SpeakCompleted = false;
+
         public Aison()
         {
             commands = new List<Command>();
@@ -26,6 +28,11 @@ namespace Aison___assistant
         public string[] TCom_Time, TCom_Data, TCom_replayLast, TCom_aisonSleep, TCom_aisonClose, TCom_MediaPause, TCom_MediaNext, TCom_MediaPrev, TCom_ProcessCalc, TCom_Explorer,
             TCom_WebBrowser, TCom_WebBrowser_Yandex, TCom_WebBrowser_Google, TCom_WindowsRes, TCom_WindowsOff, TCom_WindowsSleep, TCom_aisonRes, TCom_aisonDeView, TCom_playCityGame;
 
+
+        public void Synth_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
+        {
+            if (_isActAison_SpeakCompleted) this.Active();
+        }
 
         public void Active()
         {
@@ -59,8 +66,15 @@ namespace Aison___assistant
         public void Say(string str, bool isActAison = true)
         {
             lastSay = str;
-            Say_sound.Speak(str);
-            if(isActAison)Active();
+            Loger.print("AISON SAY -> \"" + str + "\"");
+            Say_sound.SpeakAsync(str);
+            _isActAison_SpeakCompleted = isActAison;
+        }
+
+        public void StopSay()
+        {
+            Say_sound.SpeakAsyncCancelAll();
+            Active();
         }
 
         public void Save_CustomCommandsFile()
