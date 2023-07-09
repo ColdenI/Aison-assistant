@@ -340,6 +340,9 @@ namespace Aison___assistant
                 "data/CW-WindowsSleep.txt", "data/CW-AisonRes.txt", "data/CW-AisonDeView.txt", "data/CW-CityGame.txt"
             })) { }
 
+            if (!Directory.Exists("data/custom"))
+                Directory.CreateDirectory("data/custom");
+
             // загрузить список файлов с кастомными командами
             if (new CWRFile("data/custom-c.cfg").Read().Contains(";"))
             {
@@ -405,7 +408,7 @@ namespace Aison___assistant
                 if (!File.Exists(i))
                 {
                     PlayErrorSound();
-                    MessageBox.Show("Отсутствует файл с командами!\n" + i + "\nПрогрмма создаст файл, но вам нужно его заполнить.", "Ой...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Отсутствует файл с командами!\n" + i + "\nПрогрмма создаст файл, но вам нужно его заполнить.\nФормат заполнения: ”слово 3;слово 2;слово 3”", "Ой...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     _e = false;
                     new CWRFile(i).Write(i);
                 }

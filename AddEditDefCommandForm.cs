@@ -81,7 +81,6 @@ namespace Aison___assistant
                 MessageBox.Show("Ошмбка в списке моманд!\n \nКоманды не должны быть пустыми или состоять из пробелов.\nИх должно быть хотя бы 2.");
                 return;
             }
-            
 
             if (command != null)
             {
