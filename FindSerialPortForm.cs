@@ -6,9 +6,11 @@ namespace Aison___assistant
 {
     public partial class FindSerialPortForm : Form
     {
-        public FindSerialPortForm()
+        public FindSerialPortForm(WindowStyle.WindowTheme s)
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { });
+
             SerialPortsUpdate();
 
         }

@@ -111,7 +111,7 @@ namespace Aison___assistant
                     }
                     break;
                 case EType.SAY:
-                    MainForm.Aison.Say(Arg.ToString());
+                    MainForm.Aison.Say(Arg.ToString(), false);
 
                     break;
                 case EType.COMGP:

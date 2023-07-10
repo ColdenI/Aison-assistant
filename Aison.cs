@@ -198,7 +198,7 @@ namespace Aison___assistant
         public void OpenCityGame()
         {
             isWork = false;
-            var form = new CityGameForm();
+            var form = new CityGameForm(Obj_MainForm._WindowStyle);
             //form.Show();
             DeActive();
             Obj_MainForm.Text = Obj_MainForm.Text + " - Игра в города";

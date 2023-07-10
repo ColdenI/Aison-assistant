@@ -12,17 +12,19 @@ namespace Aison___assistant
         private MainForm MainForm_;
         private string commands = "";
 
-        public AddEditDefCommandForm()
+        public AddEditDefCommandForm(WindowStyle.WindowTheme s)
         {
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { });
             MainForm_ = this.Owner as MainForm;
             textBox4.Enabled = false;
         }
 
-        public AddEditDefCommandForm(Command command_)
+        public AddEditDefCommandForm(Command command_, WindowStyle.WindowTheme s)
         {
             command = command_;
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { });
             MainForm_ = this.Owner as MainForm;
             textBox4.Enabled = false;
             if (command.Type == Command.EType.SERIAL || command.Type == Command.EType.EXE) textBox4.Enabled = true;
@@ -140,7 +142,8 @@ namespace Aison___assistant
 
         private void button2_Click(object sender, EventArgs e)
         {
-            EditCommandsListForm editCommandsForm = new EditCommandsListForm(commands);
+            MainForm_ = this.Owner as MainForm;
+            EditCommandsListForm editCommandsForm = new EditCommandsListForm(commands, MainForm_._WindowStyle);
             string str = "";
             editCommandsForm.buttonSave.Click += delegate (object sender_, EventArgs e_) 
             { 
@@ -193,13 +196,14 @@ namespace Aison___assistant
 
         private void button5_Click(object sender, EventArgs e)
         {
-            textBox3.Text = GetSerialPort();
+            textBox3.Text = GetSerialPort(this);
         }
 
-        public static string GetSerialPort()
+        public static string GetSerialPort(Form f)
         {
+            var MainForm_ = f.Owner as MainForm;
             string res = "";
-            FindSerialPortForm form = new FindSerialPortForm();
+            FindSerialPortForm form = new FindSerialPortForm(MainForm_._WindowStyle);
             form.button2.Click += delegate (object sender_, EventArgs e_)
             {
                 res = form.comboBox1.Text + ";";
@@ -207,6 +211,11 @@ namespace Aison___assistant
             };
             form.ShowDialog();
             return res;
+        }
+
+        private void AddEditDefCommandForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

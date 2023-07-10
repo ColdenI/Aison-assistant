@@ -7,8 +7,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Media;
 using System.Windows.Forms;
+using WindowStyle;
 
 namespace Aison___assistant
 {
@@ -23,6 +25,9 @@ namespace Aison___assistant
         private float sensitivity = 0.7f;
         private bool _isWelcomeSay = false;
         private int _speedSay_synth = 0;
+        private string _welcome_text_say = "Здравствуйте, вас приветствует Эйсон! Я ваш голосовой ассистент.";
+        public WindowTheme _WindowStyle;
+        private static Control[] _controlsArray;
 
         static private SpeechRecognitionEngine sre;
         private SpeechSynthesizer synth;
@@ -31,12 +36,23 @@ namespace Aison___assistant
         public MainForm()
         {
             InitializeComponent();
+
+            _controlsArray = new Control[]
+            {
+                listBox_custom_command,
+                groupBox1,
+                textBox_log_message,
+                button_actAison
+
+            };
+
             this.KeyDown += new KeyEventHandler(this.MainForm_KeyDown);
             this.KeyPreview = true;
 
 
             Loger.print("The program is running.");
             Load_DATA();
+            SetStyle(_WindowStyle, this, _controlsArray);
 
             // настройка распознования речи
             CultureInfo ci = new CultureInfo(lang_In); // подключение руского языка  -  русский
@@ -245,7 +261,7 @@ namespace Aison___assistant
             {
                 int _w = Aison.Say_sound.Rate;
                 Aison.Say_sound.Rate = 2;
-                Aison.Say("Здравствуйте, вас приветствует Эйсон! Я ваш голосовой ассистент.");
+                Aison.Say(_welcome_text_say);
                 Aison.Say_sound.Rate = _w;
             }
 
@@ -278,6 +294,7 @@ namespace Aison___assistant
             удалитьToolStripMenuItem1.Enabled = v;
             исключитьToolStripMenuItem.Enabled = v;
             экспортToolStripMenuItem.Enabled = v;
+            исполнитьКомандуToolStripMenuItem.Enabled = v;
             активироватьToolStripMenuItem.Enabled = !Aison.isActive;
         }
 
@@ -305,32 +322,49 @@ namespace Aison___assistant
             if (!cfg_file.ContainsItem("sensitivity")) cfg_file.AddItem("sensitivity", 0.7);                                            // чувствительность распознания
             if (!cfg_file.ContainsItem("is_welcome_say")) cfg_file.AddItem("is_welcome_say", false);                                    // приветвтвие пользователя при старте
             if (!cfg_file.ContainsItem("speed_say")) cfg_file.AddItem("speed_say", 0);                                                  // скорость синтеза речи
-            
-            lang_In = cfg_file.GetItemString("lang_in");
-            lang_out = cfg_file.GetItemString("lang_out");
-            timer_aison_activ.Interval = cfg_file.GetItemInt("act_time");
-            панельКомандToolStripMenuItem.Checked = cfg_file.GetItemBoolean("view_hist_pan");
-            писатьLogToolStripMenuItem.Checked = cfg_file.GetItemBoolean("write_log");
-            Loger.isLog = cfg_file.GetItemBoolean("write_log");
-            this.Size = new Size(cfg_file.GetItemInt("size_win-w"), cfg_file.GetItemInt("size_win-h"));
-            AisonVoiseVolume = cfg_file.GetItemInt("aison_volume");
-            if (cfg_file.GetItemString("PRc_user") == PRcode) isPRactive = true;
-            toolStripButton_bye_aison.Visible = !isPRactive;
-            купитьAisonToolStripMenuItem.Visible = !isPRactive;
-            //windowsToolStripMenuItem.Enabled = isPRactive;
-            timer1.Interval = cfg_file.GetItemInt("del_view_time");
-            sensitivity = cfg_file.GetItemFloat("sensitivity");
-            _isWelcomeSay = cfg_file.GetItemBoolean("is_welcome_say");
-            _speedSay_synth = cfg_file.GetItemInt("speed_say");
-            if(_speedSay_synth > 10 || _speedSay_synth < -10)
+            if (!cfg_file.ContainsItem("text_welcome_say")) cfg_file.AddItem("text_welcome_say", "Здравствуйте, вас приветствует Эйсон! Я ваш голосовой ассистент.");                                                  // скорость синтеза речи
+            if (!cfg_file.ContainsItem("theme_window")) cfg_file.AddItem("theme_window", "LIGHT");                                                  // скорость синтеза речи
+
+            try
+            {
+                lang_In = cfg_file.GetItemString("lang_in");
+                lang_out = cfg_file.GetItemString("lang_out");
+                timer_aison_activ.Interval = cfg_file.GetItemInt("act_time");
+                панельКомандToolStripMenuItem.Checked = cfg_file.GetItemBoolean("view_hist_pan");
+                писатьLogToolStripMenuItem.Checked = cfg_file.GetItemBoolean("write_log");
+                Loger.isLog = cfg_file.GetItemBoolean("write_log");
+                this.Size = new Size(cfg_file.GetItemInt("size_win-w"), cfg_file.GetItemInt("size_win-h"));
+                AisonVoiseVolume = cfg_file.GetItemInt("aison_volume");
+                if (cfg_file.GetItemString("PRc_user") == PRcode) isPRactive = true;
+                toolStripButton_bye_aison.Visible = !isPRactive;
+                купитьAisonToolStripMenuItem.Visible = !isPRactive;
+                //windowsToolStripMenuItem.Enabled = isPRactive;
+                timer1.Interval = cfg_file.GetItemInt("del_view_time");
+                sensitivity = cfg_file.GetItemFloat("sensitivity");
+                _isWelcomeSay = cfg_file.GetItemBoolean("is_welcome_say");
+                _speedSay_synth = cfg_file.GetItemInt("speed_say");
+                if (_speedSay_synth > 10 || _speedSay_synth < -10)
+                {
+                    PlayErrorSound();
+                    MessageBox.Show("Ошибка в файле конфигураций! Скорость синтеза речи должен быть в пределах (от -10 до 10) (int) параметр: “speed_say” файл: “data/config.cfg”\nПараметр установлен по умолчанию. (0)", "Ой!", MessageBoxButtons.OK);
+                    cfg_file.SetOrAddItem("speed_say", 0);
+                    _speedSay_synth = 0;
+                }
+                if (cfg_file.GetItemString("theme_window") == "LIGHT") _WindowStyle = WindowTheme.Light;
+                else if (cfg_file.GetItemString("theme_window") == "DARK") _WindowStyle = WindowTheme.Dark;
+                else if (cfg_file.GetItemString("theme_window") == "BLUE") _WindowStyle = WindowTheme.Blue;
+                else if (cfg_file.GetItemString("theme_window") == "GREEN") _WindowStyle = WindowTheme.Green;
+
+
+            }
+            catch(Exception ex)
             {
                 PlayErrorSound();
-                MessageBox.Show("Ошибка в файле конфигураций! Скорость синтеза речи должен быть в пределах (от -10 до 10) (int) параметр: “speed_say” файл: “data/config.cfg”\nПараметр установлен по умолчанию. (0)", "Ой!", MessageBoxButtons.OK);
-                cfg_file.SetOrAddItem("speed_say", 0);
-                _speedSay_synth = 0;
+                if (DialogResult.Yes == MessageBox.Show("Критическая ошибка! Файл конфигураций повреждён. Хотите восстановить файл по умолчанию?", "Критическая Ошибка!", MessageBoxButtons.YesNo, MessageBoxIcon.Error))
+                {
+                    if (File.Exists("data/config.cfg")) File.Delete("data/config.cfg");
+                }
             }
-            
-
 
 
             if (!Check_ExistFile(new string[] {
@@ -429,7 +463,7 @@ namespace Aison___assistant
                 }
 
             timer1.Stop();
-            var Form = new AddEditDefCommandForm();
+            var Form = new AddEditDefCommandForm(_WindowStyle);
             Form.Owner = this;
             Form.Show();
         }
@@ -437,7 +471,7 @@ namespace Aison___assistant
         private void Open_ByeAisonForm()
         {
             timer1.Stop();
-            new ByeAisonForm().Show();
+            new ByeAisonForm(_WindowStyle).Show();
         }
 
         private void Open_EditCommand()
@@ -445,21 +479,16 @@ namespace Aison___assistant
             if (listBox_custom_command.SelectedIndex != -1)
             {
                 timer1.Stop();
-                var Form = new AddEditDefCommandForm(Aison.commands[listBox_custom_command.SelectedIndex]);
+                var Form = new AddEditDefCommandForm(Aison.commands[listBox_custom_command.SelectedIndex], _WindowStyle);
                 Form.Owner = this;
                 Form.Show();
             }
         }
 
-        private void button_actAison_Click(object sender, EventArgs e)
+        private void ExecudeCommandClick(object sender, EventArgs e)
         {
-            if (!Aison.isActive)
-            {
-                Aison.Active();
-                timer_aison_activ.Stop();
-                timer_aison_activ.Start();
-                UI_Update();
-            }
+            if (listBox_custom_command.SelectedIndex == -1) return;
+            Aison.commands[listBox_custom_command.SelectedIndex].Make();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -500,7 +529,7 @@ namespace Aison___assistant
 
         private void OpenEditStandartCommands(string path)
         {
-            EditCommandsListForm editCommandsForm = new EditCommandsListForm(new CWRFile(path).Read());
+            EditCommandsListForm editCommandsForm = new EditCommandsListForm(new CWRFile(path).Read(), _WindowStyle);
             string str = "";
             editCommandsForm.buttonSave.Click += delegate (object sender_, EventArgs e_)
             {
@@ -609,7 +638,7 @@ namespace Aison___assistant
 
         private void всеЗарегистрированныеКомандыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new ViewAllCommandsForm(_comms);
+            var form = new ViewAllCommandsForm(_comms, _WindowStyle);
             form.ShowDialog();
         }
 
@@ -653,7 +682,7 @@ namespace Aison___assistant
         {
             timer1.Stop();
             timer1.Start();
-            new SettingsForm().ShowDialog();
+            new SettingsForm(_WindowStyle).ShowDialog();
         }
 
         private void подготовитьКУдалениюToolStripMenuItem_Click(object sender, EventArgs e)
@@ -711,7 +740,7 @@ namespace Aison___assistant
         {
             timer1.Stop();
             timer1.Start();
-            new AboutForm().Show();
+            new AboutForm(_WindowStyle).Show();
         }
 
         private void toolStripSplitButton2_ButtonClick(object sender, EventArgs e)
@@ -820,7 +849,7 @@ namespace Aison___assistant
 
         private void управлениеГруппамиКомандToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new CommandGroudForm();
+            var form = new CommandGroudForm(_WindowStyle);
             form.Owner = this;
             form.ShowDialog();
         }
@@ -1039,11 +1068,6 @@ namespace Aison___assistant
             Process.Start("explorer.exe", "data\\custom");
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-
-        }
-
         private void удалитьLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Directory.Exists("data/logs"))
@@ -1062,12 +1086,75 @@ namespace Aison___assistant
             }
         }
 
+        public static void SetStyle(WindowTheme style, Form form, Control[] controls)
+        {
+            var list = controls.ToList();
+            foreach(Control i in form.Controls) list.Add(i);
+
+            Color _bg = WindowColors.BG_Light, _fg = WindowColors.FG_Light;
+
+            if (style == WindowTheme.Light)
+            {
+                _bg = WindowColors.BG_Light;
+                _fg = WindowColors.FG_Light;
+            }
+            if (style == WindowTheme.Dark)
+            {
+                _bg = WindowColors.BG_Dark;
+                _fg = WindowColors.FG_Dark;
+            }
+            
+            if (style == WindowTheme.Blue)
+            {
+                _bg = WindowColors.BG_Blue;
+                _fg = WindowColors.FG_Blue;
+            }
+            
+            if (style == WindowTheme.Green)
+            {
+                _bg = WindowColors.BG_Green;
+                _fg = WindowColors.FG_Green;
+            }
+
+
+            form.ForeColor = _fg;
+            form.BackColor = _bg;
+            foreach (Control control in list)
+            {
+                control.BackColor = _bg;
+                control.ForeColor = _fg;
+                if (control is Panel)
+                {
+                    control.BackColor = Color.FromArgb(0, 0, 0, 0);
+                    control.ForeColor = _fg;
+                }
+                if (control is TrackBar)
+                {
+                    control.BackColor = _bg;
+                    control.ForeColor = _fg;
+                }
+                if (control is Label)
+                {
+                    control.BackColor = Color.FromArgb(0, 0, 0, 0);
+                    control.ForeColor = _fg;
+                }
+                if (control is CheckBox)
+                {
+                    control.BackColor = Color.FromArgb(0, 0, 0, 0);
+                    control.ForeColor = _fg;
+                }
+            }
+
+        }
+
         static private bool ContainsItemInArray<T>(T[] arr, T i)
         {
             foreach (T _i in arr)
                 if (_i.Equals(i)) return true;
             return false;
         }
+
+
 
     }
 

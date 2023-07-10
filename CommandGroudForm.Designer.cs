@@ -378,9 +378,9 @@
             // button_command_add
             // 
             this.button_command_add.AutoSize = true;
-            this.button_command_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button_command_add.BackColor = System.Drawing.Color.Lime;
             this.button_command_add.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button_command_add.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button_command_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_command_add.Location = new System.Drawing.Point(531, 119);
             this.button_command_add.Name = "button_command_add";
             this.button_command_add.Size = new System.Drawing.Size(101, 26);

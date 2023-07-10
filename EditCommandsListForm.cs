@@ -12,14 +12,17 @@ namespace Aison___assistant
 {
     public partial class EditCommandsListForm : Form
     {
-        public EditCommandsListForm()
+        public EditCommandsListForm(WindowStyle.WindowTheme s)
         {
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { textBox1 });
         }
 
-        public EditCommandsListForm(string commands)
+        public EditCommandsListForm(string commands, WindowStyle.WindowTheme s)
         {
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { textBox1 });
+
             listBox_CommandsList.Items.Clear();
             foreach (string i in commands.Split(new string[] { ";" }, StringSplitOptions.None)) 
                 listBox_CommandsList.Items.Add(i);

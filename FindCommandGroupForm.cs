@@ -13,9 +13,10 @@ namespace Aison___assistant
 {
     public partial class FindCommandGroupForm : Form
     {
-        public FindCommandGroupForm()
+        public FindCommandGroupForm(WindowStyle.WindowTheme s)
         {
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { });
         }
 
         private void button_find_Click(object sender, EventArgs e)

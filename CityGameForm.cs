@@ -29,9 +29,11 @@ namespace Aison___assistant
         private const string PathFileWordsCity = "data/CityGame-citys.txt";
 
 
-        public CityGameForm()
+        public CityGameForm(WindowStyle.WindowTheme s)
         {
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { });
+
             label_old_city.Text = "";
             label_old_old_city.Text = "";
             cityEx = new List<string>();

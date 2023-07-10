@@ -64,6 +64,7 @@
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel1.Controls.Add(this.label_maxScore);
             this.panel1.Controls.Add(this.label_score);
+            this.panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel1.Location = new System.Drawing.Point(7, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(271, 245);

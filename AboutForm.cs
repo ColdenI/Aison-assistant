@@ -13,9 +13,10 @@ namespace Aison___assistant
 {
     public partial class AboutForm : Form
     {
-        public AboutForm()
+        public AboutForm(WindowStyle.WindowTheme s)
         {
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] {});
         }
 
         private void AboutForm_Load(object sender, EventArgs e)

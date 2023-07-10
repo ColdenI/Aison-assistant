@@ -41,6 +41,7 @@ namespace Aison___assistant
             this.label = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label_delayOffView = new System.Windows.Forms.Label();
             this.trackBar_delayOffView = new System.Windows.Forms.TrackBar();
             this.label_sensitivity = new System.Windows.Forms.Label();
@@ -48,6 +49,7 @@ namespace Aison___assistant
             this.label_speed_say = new System.Windows.Forms.Label();
             this.trackBar_speed_say = new System.Windows.Forms.TrackBar();
             this.checkBox_isWelcomeSay = new System.Windows.Forms.CheckBox();
+            this.comboBox_window_style = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_volue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_timeAct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_delayOffView)).BeginInit();
@@ -163,6 +165,18 @@ namespace Aison___assistant
             this.label5.Text = "Скорость речи:";
             this.toolTip1.SetToolTip(this.label5, "Громкость синтеза речи.");
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(19, 373);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 20);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Стиль окна:";
+            this.toolTip1.SetToolTip(this.label2, "Время которое будет активен Aison до ого как заснёт. (в секундах)");
+            // 
             // label_delayOffView
             // 
             this.label_delayOffView.AutoSize = true;
@@ -239,20 +253,38 @@ namespace Aison___assistant
             // checkBox_isWelcomeSay
             // 
             this.checkBox_isWelcomeSay.AutoSize = true;
+            this.checkBox_isWelcomeSay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.checkBox_isWelcomeSay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.checkBox_isWelcomeSay.Location = new System.Drawing.Point(24, 329);
             this.checkBox_isWelcomeSay.Name = "checkBox_isWelcomeSay";
             this.checkBox_isWelcomeSay.Size = new System.Drawing.Size(341, 24);
             this.checkBox_isWelcomeSay.TabIndex = 19;
             this.checkBox_isWelcomeSay.Text = "Приветствие при старте программы";
-            this.checkBox_isWelcomeSay.UseVisualStyleBackColor = true;
+            this.checkBox_isWelcomeSay.UseVisualStyleBackColor = false;
             this.checkBox_isWelcomeSay.CheckedChanged += new System.EventHandler(this.checkBox_isWelcomeSay_CheckedChanged);
+            // 
+            // comboBox_window_style
+            // 
+            this.comboBox_window_style.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox_window_style.FormattingEnabled = true;
+            this.comboBox_window_style.Items.AddRange(new object[] {
+            "LIGHT",
+            "DARK",
+            "BLUE",
+            "GREEN"});
+            this.comboBox_window_style.Location = new System.Drawing.Point(247, 370);
+            this.comboBox_window_style.Name = "comboBox_window_style";
+            this.comboBox_window_style.Size = new System.Drawing.Size(144, 28);
+            this.comboBox_window_style.TabIndex = 21;
+            this.comboBox_window_style.SelectedIndexChanged += new System.EventHandler(this.comboBox_window_style_SelectedIndexChanged);
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 369);
+            this.ClientSize = new System.Drawing.Size(653, 419);
+            this.Controls.Add(this.comboBox_window_style);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBox_isWelcomeSay);
             this.Controls.Add(this.label_speed_say);
             this.Controls.Add(this.trackBar_speed_say);
@@ -308,5 +340,7 @@ namespace Aison___assistant
         private System.Windows.Forms.TrackBar trackBar_speed_say;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox checkBox_isWelcomeSay;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox_window_style;
     }
 }

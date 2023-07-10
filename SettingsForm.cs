@@ -17,9 +17,10 @@ namespace Aison___assistant
         private bool isEdit = false;
 
 
-        public SettingsForm()
+        public SettingsForm(WindowStyle.WindowTheme s)
         {
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { });
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace Aison___assistant
 
             checkBox_isWelcomeSay.Checked = cfg_file.GetItemBoolean("is_welcome_say");
 
-
+            comboBox_window_style.Text = cfg_file.GetItemString("theme_window");
 
             isEdit = false;
         }
@@ -89,11 +90,17 @@ namespace Aison___assistant
             cfg_file.SetOrAddItem("aison_volume", trackBar_volue.Value);
             cfg_file.SetOrAddItem("speed_say", trackBar_speed_say.Value);
             cfg_file.SetOrAddItem("is_welcome_say", checkBox_isWelcomeSay.Checked);
+            cfg_file.SetOrAddItem("theme_window", comboBox_window_style.Text);
 
             if (MessageBox.Show("Изменения вступят в силу только после перезапуска программы.\nХотите перезапустить её сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
         }
 
         private void checkBox_isWelcomeSay_CheckedChanged(object sender, EventArgs e)
+        {
+            isEdit = true;
+        }
+
+        private void comboBox_window_style_SelectedIndexChanged(object sender, EventArgs e)
         {
             isEdit = true;
         }

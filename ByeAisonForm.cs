@@ -14,9 +14,10 @@ namespace Aison___assistant
 {
     public partial class ByeAisonForm : Form
     {
-        public ByeAisonForm()
+        public ByeAisonForm(WindowStyle.WindowTheme s)
         {
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { textBox1});
         }
 
         private void button2_Click(object sender, EventArgs e)

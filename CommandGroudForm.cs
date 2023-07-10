@@ -15,9 +15,10 @@ namespace Aison___assistant
         private List<Command> Commands = new List<Command>();
 
 
-        public CommandGroudForm()
+        public CommandGroudForm(WindowStyle.WindowTheme s)
         {
             InitializeComponent();
+            MainForm.SetStyle(s, this, new Control[] { listBox_commands,textBox_command_name,textBox_command_arg_2,textBox_command_arg_1,comboBox_command_type});
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.KeyPreview = true;
             textBox_command_arg_2.Enabled = false;
@@ -95,7 +96,7 @@ namespace Aison___assistant
 
         private void button5_Click(object sender, EventArgs e)
         {
-            textBox_command_arg_1.Text = AddEditDefCommandForm.GetSerialPort();
+            textBox_command_arg_1.Text = AddEditDefCommandForm.GetSerialPort(this);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -298,7 +299,8 @@ namespace Aison___assistant
 
         private void Find()
         {
-            var form = new FindCommandGroupForm();
+            var formMain = this.Owner as MainForm;
+            var form = new FindCommandGroupForm(formMain._WindowStyle);
             form.Owner = this;
             form.button_open.Click += delegate (object sender_, EventArgs e_)
             {
