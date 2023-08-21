@@ -9,7 +9,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using WindowStyle;
 
@@ -29,7 +28,7 @@ namespace Aison___assistant
         private int _speedSay_synth = 0;
         private string _welcome_text_say = "Здравствуйте, вас приветствует Эйсон! Я ваш голосовой ассистент.";
         public WindowTheme _WindowStyle;
-        public int _setVolume;
+        public int _setVolume = 2;
         private static Control[] _controlsArray;
 
         static private SpeechRecognitionEngine sre;
@@ -295,6 +294,7 @@ namespace Aison___assistant
             {
                 PlayErrorSound();
                 MessageBox.Show($"Произошла критическая ошибка и файлом дополнительных команд!\nПопробуйте удалить:\n{Path.GetFullPath("data\\custom-c.cfg")}\nИли переустановите программу.");
+                Loger.print($"Произошла критическая ошибка и файлом дополнительных команд!\nПопробуйте удалить:\n{Path.GetFullPath("data\\custom-c.cfg")}\nИли переустановите программу.");
                 Application.Exit();
             }
         }
@@ -376,6 +376,7 @@ namespace Aison___assistant
             catch(Exception ex)
             {
                 PlayErrorSound();
+                Loger.print("Критическая ошибка! Файл конфигураций повреждён!");
                 if (DialogResult.Yes == MessageBox.Show("Критическая ошибка! Файл конфигураций повреждён. Хотите восстановить файл по умолчанию?", "Критическая Ошибка!", MessageBoxButtons.YesNo, MessageBoxIcon.Error))
                 {
                     if (File.Exists("data/config.cfg")) File.Delete("data/config.cfg");
@@ -407,6 +408,7 @@ namespace Aison___assistant
                     {
                         PlayErrorSound();
                         MessageBox.Show("File error or not found: " + i);
+                        Loger.print("File error or not found: " + i);
                     }
                     else
                         Aison.commands.Add(newC);
@@ -463,6 +465,7 @@ namespace Aison___assistant
                 {
                     PlayErrorSound();
                     MessageBox.Show("Отсутствует файл с командами!\n" + i + "\nПрогрмма создаст файл, но вам нужно его заполнить.\nФормат заполнения: ”слово 3;слово 2;слово 3”", "Ой...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Loger.print("Отсутствует файл с командами!\n" + i);
                     _e = false;
                     new CWRFile(i).Write(i);
                 }
@@ -531,6 +534,7 @@ namespace Aison___assistant
             if (listBox_custom_command.SelectedIndex == -1) return;
             if (MessageBox.Show("Вы уверенны, что хотите удалить элемент?\nВосстановить будет невозможно!", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) return;
             File.Delete("data/custom/" + listBox_custom_command.Items[listBox_custom_command.SelectedIndex]);
+            Loger.print("Удалён элемент: " + listBox_custom_command.Items[listBox_custom_command.SelectedIndex]);
             Aison.commands.Remove(Aison.commands[listBox_custom_command.SelectedIndex]);
             Aison.Save_CustomCommandsFile();
             UI_Update();
@@ -542,6 +546,7 @@ namespace Aison___assistant
             if (MessageBox.Show("Вы уверенны, что хотите исключить элемент?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK) return;
             Aison.commands.Remove(Aison.commands[listBox_custom_command.SelectedIndex]);
             Aison.Save_CustomCommandsFile();
+            Loger.print("Элемент исключён из списка кастомных команд! : " + Aison.commands[listBox_custom_command.SelectedIndex].Path);
             UI_Update();
 
             if (MessageBox.Show("Чтобы изменения вступили в силу нужно перезапустить программу. Хотите сделать это сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
@@ -970,6 +975,7 @@ namespace Aison___assistant
             {
                 PlayErrorSound();
                 MessageBox.Show("File error or not found: " + Path.GetFileName(in_file));
+                Loger.print("File error or not found: " + Path.GetFileName(in_file));
                 return;
             }
             else

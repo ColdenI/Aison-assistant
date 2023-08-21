@@ -68,6 +68,7 @@ namespace Aison___assistant
                     {
                         if (Arg_2 == "") System.Diagnostics.Process.Start(Arg);
                         else Aison.OpenProcessArg(Arg, Arg_2);
+                        Loger.print("Start: " + Arg + "  args: " + Arg_2);
                     }
                     catch(Exception ex)
                     {
@@ -80,6 +81,7 @@ namespace Aison___assistant
                         try
                         {
                             var v = wb.DownloadString(Arg);
+                            Loger.print("URL start: " + Arg);
                         }
                         catch (System.Net.WebException)
                         {
@@ -99,6 +101,7 @@ namespace Aison___assistant
                             serialPort.Open();
 
                             serialPort.Write(Arg_2);
+                            Loger.print("Serial start: " + Arg + " args: " + Arg_2);
                         }
                     }
                     catch (Exception ex)
