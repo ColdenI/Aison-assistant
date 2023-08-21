@@ -50,11 +50,15 @@ namespace Aison___assistant
             this.trackBar_speed_say = new System.Windows.Forms.TrackBar();
             this.checkBox_isWelcomeSay = new System.Windows.Forms.CheckBox();
             this.comboBox_window_style = new System.Windows.Forms.ComboBox();
+            this.label_setVolume = new System.Windows.Forms.Label();
+            this.trackBar_setVolume = new System.Windows.Forms.TrackBar();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_volue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_timeAct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_delayOffView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_sensitivity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_speed_say)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_setVolume)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -169,7 +173,7 @@ namespace Aison___assistant
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(19, 373);
+            this.label2.Location = new System.Drawing.Point(19, 433);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 20);
@@ -255,7 +259,7 @@ namespace Aison___assistant
             this.checkBox_isWelcomeSay.AutoSize = true;
             this.checkBox_isWelcomeSay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.checkBox_isWelcomeSay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox_isWelcomeSay.Location = new System.Drawing.Point(24, 329);
+            this.checkBox_isWelcomeSay.Location = new System.Drawing.Point(24, 389);
             this.checkBox_isWelcomeSay.Name = "checkBox_isWelcomeSay";
             this.checkBox_isWelcomeSay.Size = new System.Drawing.Size(341, 24);
             this.checkBox_isWelcomeSay.TabIndex = 19;
@@ -272,17 +276,59 @@ namespace Aison___assistant
             "DARK",
             "BLUE",
             "GREEN"});
-            this.comboBox_window_style.Location = new System.Drawing.Point(247, 370);
+            this.comboBox_window_style.Location = new System.Drawing.Point(247, 430);
             this.comboBox_window_style.Name = "comboBox_window_style";
             this.comboBox_window_style.Size = new System.Drawing.Size(144, 28);
             this.comboBox_window_style.TabIndex = 21;
             this.comboBox_window_style.SelectedIndexChanged += new System.EventHandler(this.comboBox_window_style_SelectedIndexChanged);
             // 
+            // label_setVolume
+            // 
+            this.label_setVolume.AutoSize = true;
+            this.label_setVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_setVolume.Location = new System.Drawing.Point(577, 343);
+            this.label_setVolume.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_setVolume.Name = "label_setVolume";
+            this.label_setVolume.Size = new System.Drawing.Size(20, 24);
+            this.label_setVolume.TabIndex = 24;
+            this.label_setVolume.Text = "2";
+            // 
+            // trackBar_setVolume
+            // 
+            this.trackBar_setVolume.LargeChange = 2;
+            this.trackBar_setVolume.Location = new System.Drawing.Point(248, 327);
+            this.trackBar_setVolume.Margin = new System.Windows.Forms.Padding(4);
+            this.trackBar_setVolume.Maximum = 50;
+            this.trackBar_setVolume.Minimum = 2;
+            this.trackBar_setVolume.Name = "trackBar_setVolume";
+            this.trackBar_setVolume.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBar_setVolume.Size = new System.Drawing.Size(320, 56);
+            this.trackBar_setVolume.SmallChange = 2;
+            this.trackBar_setVolume.TabIndex = 22;
+            this.trackBar_setVolume.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBar_setVolume.Value = 2;
+            this.trackBar_setVolume.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(21, 343);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(214, 17);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Степень изменения громкости:";
+            this.toolTip1.SetToolTip(this.label7, "Величина на который будет изменятся громкость (2 - 50)");
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 419);
+            this.ClientSize = new System.Drawing.Size(653, 477);
+            this.Controls.Add(this.label_setVolume);
+            this.Controls.Add(this.trackBar_setVolume);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.comboBox_window_style);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBox_isWelcomeSay);
@@ -316,6 +362,7 @@ namespace Aison___assistant
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_delayOffView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_sensitivity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_speed_say)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_setVolume)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,5 +389,8 @@ namespace Aison___assistant
         private System.Windows.Forms.CheckBox checkBox_isWelcomeSay;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox_window_style;
+        private System.Windows.Forms.Label label_setVolume;
+        private System.Windows.Forms.TrackBar trackBar_setVolume;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -7,7 +7,8 @@ namespace WindowStyle
         Light = 0,
         Dark = 1,
         Blue = 2,
-        Green
+        Green,
+        Red
     }
     public static class WindowColors
     {
@@ -22,5 +23,8 @@ namespace WindowStyle
 
         public static Color BG_Green = Color.FromArgb(150, 255, 168);
         public static Color FG_Green = Color.Black;
+
+        public static Color BG_Red = Color.FromArgb(255, 186, 186);
+        public static Color FG_Red = Color.Black;
     }
 }

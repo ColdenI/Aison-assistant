@@ -3,12 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Aison___assistant
 {
     public class Aison
     {
+        private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
+        private const int APPCOMMAND_VOLUME_UP = 0xA0000;
+        private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
+        private const int WM_APPCOMMAND = 0x319;
+
         public bool isActive = false;
         public bool isWork = true;
         public string[] Active_Words;
@@ -26,7 +32,8 @@ namespace Aison___assistant
         }
 
         public string[] TCom_Time, TCom_Data, TCom_replayLast, TCom_aisonSleep, TCom_aisonClose, TCom_MediaPause, TCom_MediaNext, TCom_MediaPrev, TCom_ProcessCalc, TCom_Explorer,
-            TCom_WebBrowser, TCom_WebBrowser_Yandex, TCom_WebBrowser_Google, TCom_WindowsRes, TCom_WindowsOff, TCom_WindowsSleep, TCom_aisonRes, TCom_aisonDeView, TCom_playCityGame;
+            TCom_WebBrowser, TCom_WebBrowser_Yandex, TCom_WebBrowser_Google, TCom_WindowsRes, TCom_WindowsOff, TCom_WindowsSleep, TCom_aisonRes, TCom_aisonDeView, TCom_playCityGame,
+            TCom_SysVolumeUp, TCom_SysVolumeDown, TCom_SysVolumeMute;
 
 
         public void Synth_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
@@ -47,7 +54,7 @@ namespace Aison___assistant
             {
                 soundPlayer.Play();
             }
-
+            
         }
 
         public void DeActive()
@@ -189,8 +196,8 @@ namespace Aison___assistant
                 UseShellExecute = true,
                 WorkingDirectory = @"C:\Windows\System32",
                 FileName = @"C:\Windows\System32\cmd.exe",
-                Arguments = "/C " + arg
-                ,WindowStyle = ProcessWindowStyle.Hidden
+                Arguments = "/C " + arg,
+                WindowStyle = ProcessWindowStyle.Hidden
             };
             Process.Start(proc);
         }
@@ -208,6 +215,29 @@ namespace Aison___assistant
             Obj_MainForm.Text = Obj_MainForm.Text.Split(new string[] { " - Игра в города" }, StringSplitOptions.None)[0];
             Obj_MainForm.Enabled = true;
             Obj_MainForm.Update();
+        }
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        public void Com_SysMute()
+        {   
+            SendMessageW(Obj_MainForm.Handle, WM_APPCOMMAND, Obj_MainForm.Handle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
+            Active();
+        }
+
+        public void Com_SysVolDown()
+        {
+            for (int i = 0; i < Obj_MainForm._setVolume / 2; i++)
+                SendMessageW(Obj_MainForm.Handle, WM_APPCOMMAND, Obj_MainForm.Handle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+            Active();
+        }
+
+        public void Com_SysVolUp()
+        {
+            for (int i = 0; i < Obj_MainForm._setVolume / 2; i++)
+                SendMessageW(Obj_MainForm.Handle, WM_APPCOMMAND, Obj_MainForm.Handle, (IntPtr)APPCOMMAND_VOLUME_UP);
+            Active();
         }
 
     }

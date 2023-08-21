@@ -46,6 +46,9 @@ namespace Aison___assistant
 
             comboBox_window_style.Text = cfg_file.GetItemString("theme_window");
 
+            trackBar_setVolume.Value = cfg_file.GetItemInt("set_volume");
+            label_setVolume.Text = cfg_file.GetItemInt("set_volume").ToString();
+
             isEdit = false;
         }
 
@@ -91,6 +94,7 @@ namespace Aison___assistant
             cfg_file.SetOrAddItem("speed_say", trackBar_speed_say.Value);
             cfg_file.SetOrAddItem("is_welcome_say", checkBox_isWelcomeSay.Checked);
             cfg_file.SetOrAddItem("theme_window", comboBox_window_style.Text);
+            cfg_file.SetOrAddItem("set_volume", trackBar_setVolume.Value);
 
             if (MessageBox.Show("Изменения вступят в силу только после перезапуска программы.\nХотите перезапустить её сейчас?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK) Application.Restart();
         }
@@ -102,6 +106,14 @@ namespace Aison___assistant
 
         private void comboBox_window_style_SelectedIndexChanged(object sender, EventArgs e)
         {
+            isEdit = true;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            if (trackBar_setVolume.Value % 2 != 0)
+                trackBar_setVolume.Value++;
+            label_setVolume.Text = trackBar_setVolume.Value.ToString();
             isEdit = true;
         }
     }

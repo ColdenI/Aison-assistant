@@ -9,8 +9,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using WindowStyle;
+
 
 namespace Aison___assistant
 {
@@ -27,6 +29,7 @@ namespace Aison___assistant
         private int _speedSay_synth = 0;
         private string _welcome_text_say = "Здравствуйте, вас приветствует Эйсон! Я ваш голосовой ассистент.";
         public WindowTheme _WindowStyle;
+        public int _setVolume;
         private static Control[] _controlsArray;
 
         static private SpeechRecognitionEngine sre;
@@ -87,9 +90,12 @@ namespace Aison___assistant
                 _comms.AddRange(Aison.TCom_aisonRes);
                 _comms.AddRange(Aison.TCom_aisonDeView);
                 _comms.AddRange(Aison.TCom_playCityGame);
+                _comms.AddRange(Aison.TCom_SysVolumeUp);
+                _comms.AddRange(Aison.TCom_SysVolumeDown);
+                _comms.AddRange(Aison.TCom_SysVolumeMute);
 
                 // мои кастомные команды регистрация
-                _comms.AddRange(new string[] {"как тебя зовут", "кто ты такой" });
+                _comms.AddRange(new string[] {"как тебя зовут", "кто ты такой", "што ты умеешь", "што ты можешь" });
 
 
                 foreach (Command i in Aison.commands) 
@@ -107,6 +113,8 @@ namespace Aison___assistant
                 Loger.print(ex.ToString());
                 return;
             }
+
+            
 
             try
             {
@@ -220,8 +228,12 @@ namespace Aison___assistant
                     if (ContainsItemInArray<string>(Aison.TCom_aisonRes, e.Result.Text)) Aison.Com_AisonProgramReStart();
                     if (ContainsItemInArray<string>(Aison.TCom_aisonDeView, e.Result.Text)) Aison.Com_aisonDeView();
                     if (ContainsItemInArray<string>(Aison.TCom_playCityGame, e.Result.Text)) Aison.OpenCityGame();
+                    if (ContainsItemInArray<string>(Aison.TCom_SysVolumeUp, e.Result.Text)) Aison.Com_SysVolUp();
+                    if (ContainsItemInArray<string>(Aison.TCom_SysVolumeDown, e.Result.Text)) Aison.Com_SysVolDown();
+                    if (ContainsItemInArray<string>(Aison.TCom_SysVolumeMute, e.Result.Text)) Aison.Com_SysMute();
 
                     if (ContainsItemInArray<string>(new string[] { "как тебя зовут", "кто ты такой" }, e.Result.Text)) Aison.Say("меня зовут эйсон. я ваш голосовой ассистент");
+                    if (ContainsItemInArray<string>(new string[] { "што ты умеешь", "што ты можешь" }, e.Result.Text)) Aison.Say("Я могу открывать программы, помогать с управлением вашим компьютером, отправлять Ю Р Л и сериал запросы, выполнять группы команд и отвечать на ваши вопросы.");
 
                     // мои кастомные команды (исполнения)
 
@@ -324,6 +336,7 @@ namespace Aison___assistant
             if (!cfg_file.ContainsItem("speed_say")) cfg_file.AddItem("speed_say", 0);                                                  // скорость синтеза речи
             if (!cfg_file.ContainsItem("text_welcome_say")) cfg_file.AddItem("text_welcome_say", "Здравствуйте, вас приветствует Эйсон! Я ваш голосовой ассистент.");                                                  // скорость синтеза речи
             if (!cfg_file.ContainsItem("theme_window")) cfg_file.AddItem("theme_window", "LIGHT");                                                  // скорость синтеза речи
+            if (!cfg_file.ContainsItem("set_volume")) cfg_file.AddItem("set_volume", 2);                                                  // скорость синтеза речи
 
             try
             {
@@ -343,6 +356,7 @@ namespace Aison___assistant
                 sensitivity = cfg_file.GetItemFloat("sensitivity");
                 _isWelcomeSay = cfg_file.GetItemBoolean("is_welcome_say");
                 _speedSay_synth = cfg_file.GetItemInt("speed_say");
+                _welcome_text_say = cfg_file.GetItemString("text_welcome_say");
                 if (_speedSay_synth > 10 || _speedSay_synth < -10)
                 {
                     PlayErrorSound();
@@ -354,6 +368,8 @@ namespace Aison___assistant
                 else if (cfg_file.GetItemString("theme_window") == "DARK") _WindowStyle = WindowTheme.Dark;
                 else if (cfg_file.GetItemString("theme_window") == "BLUE") _WindowStyle = WindowTheme.Blue;
                 else if (cfg_file.GetItemString("theme_window") == "GREEN") _WindowStyle = WindowTheme.Green;
+                else if (cfg_file.GetItemString("theme_window") == "RED") _WindowStyle = WindowTheme.Red;
+                _setVolume = cfg_file.GetItemInt("set_volume");
 
 
             }
@@ -371,7 +387,8 @@ namespace Aison___assistant
                 "data/AW.txt", "data/CW-time.txt" , "data/CW-data.txt" , "data/CW-replayLastMessage.txt" , "data/CW-AisonSleep.txt",
                 "data/CW-AisonClose.txt","data/CW-MediaPause.txt","data/CW-MediaNext.txt","data/CW-MediaPrev.txt","data/CW-OpenCalc.txt", "data/CW-OpenExplorer.txt",
                 "data/CW-OpenWebBrowser.txt","data/CW-OpenWebBrowser_Yandex.txt","data/CW-OpenWebBrowser_Google.txt","data/CW-WindowsOff.txt","data/CW-WindowsRes.txt",
-                "data/CW-WindowsSleep.txt", "data/CW-AisonRes.txt", "data/CW-AisonDeView.txt", "data/CW-CityGame.txt"
+                "data/CW-WindowsSleep.txt", "data/CW-AisonRes.txt", "data/CW-AisonDeView.txt", "data/CW-CityGame.txt", "data/CW-SysVolumeUp.txt", "data/CW-SysVolumeDown.txt", 
+                "data/CW-SysVolumeMute.txt"
             })) { }
 
             if (!Directory.Exists("data/custom"))
@@ -419,6 +436,9 @@ namespace Aison___assistant
             Aison.TCom_aisonRes = new CWRFile("data/CW-AisonRes.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
             Aison.TCom_aisonDeView = new CWRFile("data/CW-AisonDeView.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
             Aison.TCom_playCityGame = new CWRFile("data/CW-CityGame.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
+            Aison.TCom_SysVolumeUp = new CWRFile("data/CW-SysVolumeUp.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
+            Aison.TCom_SysVolumeDown = new CWRFile("data/CW-SysVolumeDown.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
+            Aison.TCom_SysVolumeMute = new CWRFile("data/CW-SysVolumeMute.txt").Read().Split(new string[] { ";" }, StringSplitOptions.None);
 
 
             if (!File.Exists("data/isTraining") && DialogResult.OK == MessageBox.Show("Хотите пройти обучение пользование программой?", "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
@@ -1115,6 +1135,12 @@ namespace Aison___assistant
                 _bg = WindowColors.BG_Green;
                 _fg = WindowColors.FG_Green;
             }
+            
+            if (style == WindowTheme.Red)
+            {
+                _bg = WindowColors.BG_Red;
+                _fg = WindowColors.FG_Red;
+            }
 
 
             form.ForeColor = _fg;
@@ -1147,13 +1173,27 @@ namespace Aison___assistant
 
         }
 
+        private void увеличитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenEditStandartCommands("data/CW-SysVolumeUp.txt");
+        }
+
+        private void уменьшитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenEditStandartCommands("data/CW-SysVolumeDown.txt");
+        }
+
+        private void включитьВыключитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenEditStandartCommands("data/CW-SysVolumeMute.txt");
+        }
+
         static private bool ContainsItemInArray<T>(T[] arr, T i)
         {
             foreach (T _i in arr)
                 if (_i.Equals(i)) return true;
             return false;
         }
-
 
 
     }
